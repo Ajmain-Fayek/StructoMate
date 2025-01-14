@@ -1,12 +1,10 @@
-import Footer from "../../Shared/Footer/Footer";
-import Navbar from "../../Shared/NavBar/Navbar";
+import { Outlet } from "react-router";
 
 const Home = () => {
     return (
         <>
-            <Navbar />
             <h1>Home</h1>
-            <Footer />
+            <Outlet />
         </>
     );
 };

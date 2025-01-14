@@ -4,27 +4,34 @@ import Appartment from "../Pages/Appartment/Appartment/Appartment";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
 import MemberAndUserProfile from "../Pages/Dashboard/Profiles/UserAndMemberProfile/MemberAndUserProfile";
 import AdminProfile from "../Pages/Dashboard/Profiles/AdminProfile/AdminProfile";
+import MainLayout from "../Layout/MainLayout/MainLayout";
 
 const routes = createBrowserRouter([
     {
         path: "/",
-        element: <Home />,
-    },
-    {
-        path: "apartment",
-        element: <Appartment />,
-    },
-    {
-        path: "dashboard",
-        element: <Dashboard />,
+        element: <MainLayout />,
         children: [
             {
-                path: "dashboard/myProfile",
-                element: <MemberAndUserProfile />,
+                path: "/",
+                element: <Home />,
             },
             {
-                path: "dashboard/adminProfile",
-                element: <AdminProfile />,
+                path: "dashboard",
+                element: <Dashboard />,
+                children: [
+                    {
+                        path: "myProfile",
+                        element: <MemberAndUserProfile />,
+                    },
+                    {
+                        path: "adminProfile",
+                        element: <AdminProfile />,
+                    },
+                ],
+            },
+            {
+                path: "apartment",
+                element: <Appartment />,
             },
         ],
     },

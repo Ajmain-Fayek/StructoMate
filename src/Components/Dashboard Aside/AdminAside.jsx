@@ -5,29 +5,29 @@ const AdminAside = () => {
         <div className="flex flex-col space-y-4 border w-fit p-4">
             <NavLink
                 className="border-b border-gray-400 p-2"
-                to={"dashboard/adminProfile"}
+                to={"adminProfile"}
             >
                 Profile(Admin)
             </NavLink>
             <NavLink
                 className="border-b border-gray-400 p-2"
-                to={"dashboard/adminProfile"}
+                to={"adminProfile"}
             >
                 Manage Members
             </NavLink>
             <NavLink
                 className="border-b border-gray-400 p-2"
-                to={"dashboard/adminProfile"}
+                to={"adminProfile"}
             >
                 Make Announcements
             </NavLink>
             <NavLink
                 className="border-b border-gray-400 p-2"
-                to={"dashboard/adminProfile"}
+                to={"adminProfile"}
             >
                 Agreement requests
             </NavLink>
-            <NavLink className="p-2" to={"dashboard/adminProfile"}>
+            <NavLink className="p-2" to={"adminProfile"}>
                 Manage Coupons
             </NavLink>
         </div>
