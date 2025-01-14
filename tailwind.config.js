@@ -2,7 +2,15 @@
 export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                Inter: "Inter",
+                "Source Code Pro": "Source Code Pro",
+            },
+            colors: {
+                overlay: "#001",
+            },
+        },
     },
-    plugins: [],
+    plugins: [require("daisyui")],
 };

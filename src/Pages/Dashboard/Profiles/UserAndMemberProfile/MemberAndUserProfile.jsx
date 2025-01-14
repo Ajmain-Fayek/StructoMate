@@ -1,8 +1,5 @@
-
 const MemberAndUserProfile = () => {
-  return (
-    <div>MemberAndUserProfile</div>
-  )
-}
+    return <div>MemberAndUserProfile</div>;
+};
 
-export default MemberAndUserProfile
+export default MemberAndUserProfile;
