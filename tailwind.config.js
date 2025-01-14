@@ -5,7 +5,7 @@ export default {
         extend: {
             fontFamily: {
                 Inter: "Inter",
-                "Source Code Pro": "Source Code Pro",
+                "Source-Code-Pro": "Source Code Pro",
             },
             colors: {
                 overlay: "#001",

@@ -8,6 +8,12 @@
     font-family: "Inter", serif;
 }
 
+.nav-menu .active {
+    background: transparent;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
