@@ -1,8 +1,5 @@
-
 const UserAnnouncements = () => {
-  return (
-    <div>UserAnnouncements</div>
-  )
-}
+    return <div>UserAnnouncements</div>;
+};
 
-export default UserAnnouncements
+export default UserAnnouncements;

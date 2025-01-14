@@ -1,8 +1,5 @@
-
 const ManageMembers = () => {
-  return (
-    <div>ManageMembers</div>
-  )
-}
+    return <div>ManageMembers</div>;
+};
 
-export default ManageMembers
+export default ManageMembers;

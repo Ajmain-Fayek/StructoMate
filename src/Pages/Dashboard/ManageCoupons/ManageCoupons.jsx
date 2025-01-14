@@ -1,8 +1,5 @@
-
 const ManageCoupons = () => {
-  return (
-    <div>ManageCoupons</div>
-  )
-}
+    return <div>ManageCoupons</div>;
+};
 
-export default ManageCoupons
+export default ManageCoupons;

@@ -1,8 +1,5 @@
-
 const AgreementRequests = () => {
-  return (
-    <div>AgreementRequests</div>
-  )
-}
+    return <div>AgreementRequests</div>;
+};
 
-export default AgreementRequests
+export default AgreementRequests;

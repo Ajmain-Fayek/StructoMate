@@ -1,8 +1,5 @@
-
 const AdminAnnouncements = () => {
-  return (
-    <div>AdminAnnouncements</div>
-  )
-}
+    return <div>AdminAnnouncements</div>;
+};
 
-export default AdminAnnouncements
+export default AdminAnnouncements;

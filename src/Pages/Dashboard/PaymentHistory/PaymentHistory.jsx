@@ -1,8 +1,5 @@
-
 const PaymentHistory = () => {
-  return (
-    <div>PaymentHistory</div>
-  )
-}
+    return <div>PaymentHistory</div>;
+};
 
-export default PaymentHistory
+export default PaymentHistory;

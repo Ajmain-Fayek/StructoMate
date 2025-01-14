@@ -1,7 +1,5 @@
 const MakePayment = () => {
-  return (
-    <div>MakePayment</div>
-  )
-}
+    return <div>MakePayment</div>;
+};
 
-export default MakePayment
+export default MakePayment;

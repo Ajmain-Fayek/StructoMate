@@ -14,6 +14,19 @@
     font-weight: 600;
 }
 
+.admin-aside .active {
+    font-weight: 500;
+    color: rgba(0, 0, 204, 0.856);
+}
+.member-aside .active {
+    font-weight: 500;
+    color: rgba(0, 0, 204, 0.856);
+}
+.user-aside .active {
+    font-weight: 500;
+    color: rgba(0, 0, 204, 0.856);
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
