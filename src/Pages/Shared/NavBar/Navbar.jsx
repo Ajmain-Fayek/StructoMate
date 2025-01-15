@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router";
 const NavBar = () => {
     const user = true;
     return (
-        <div className=" bg-overlay text-white sticky top-0 z-[999999]">
+        <div className=" bg-overlay text-white shadow-md sticky top-0 z-[999999]">
             <div className="navbar max-w-screen-2xl mx-auto">
                 <div className="navbar-start">
                     <Link

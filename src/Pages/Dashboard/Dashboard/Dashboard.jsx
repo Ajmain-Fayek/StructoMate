@@ -16,12 +16,12 @@ const Dashboard = () => {
                     {user?.role === "member" && <MemberAside />}
                     {user?.role === "admin" && <AdminAside />}
                 </div>
-                <div className="border md:col-span-8 sm:col-span-7 col-span-12">
+                <div className="border border-gray-400 shadow-md min-h-20 md:col-span-8 sm:col-span-7 col-span-12 p-2 sm:p-4">
                     <Outlet />
                 </div>
             </div>
         </>
-    );
+    ); 
 };
 
 export default Dashboard;
