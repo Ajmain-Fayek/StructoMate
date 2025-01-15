@@ -17,61 +17,61 @@ const SliderBanner = () => {
             <Carousel autoPlay={true} dynamicHeight={true} infiniteLoop={true}>
                 <div>
                     <img
-                        className="max-h-[650px] object-cover object-center"
+                        className="max-h-[750px] object-cover object-[center_65%]"
                         src={apartment1}
                     />
                 </div>
                 <div>
                     <img
-                        className="max-h-[650px] object-cover object-center"
+                        className="max-h-[750px]  object-cover object-[center_65%]"
                         src={apartment2}
                     />
                 </div>
                 <div>
                     <img
-                        className="max-h-[650px] object-cover object-center"
+                        className="max-h-[750px]  object-cover object-[center_65%]"
                         src={apartment3}
                     />
                 </div>
                 <div>
                     <img
-                        className="max-h-[650px] object-cover object-center"
+                        className="max-h-[750px]  object-cover object-[center_65%]"
                         src={apartment4}
                     />
                 </div>
                 <div>
                     <img
-                        className="max-h-[650px] object-cover object-center"
+                        className="max-h-[750px]  object-cover object-[center_60%]"
                         src={apartment5}
                     />
                 </div>
                 <div>
                     <img
-                        className="max-h-[650px] object-cover object-center"
+                        className="max-h-[750px]  object-cover object-[center_65%]"
                         src={apartment6}
                     />
                 </div>
                 <div>
                     <img
-                        className="max-h-[650px] object-cover object-center"
+                        className="max-h-[750px]  object-cover object-[center_65%]"
                         src={apartment7}
                     />
                 </div>
                 <div>
                     <img
-                        className="max-h-[650px] object-cover object-center"
+                        className="max-h-[750px]  object-cover object-[center_60%]"
                         src={apartment8}
                     />
                 </div>
                 <div>
                     <img
-                        className="max-h-[650px] object-cover object-center"
+                        className="max-h-[750px]  object-cover object-[center_60%]"
                         src={apartment9}
                     />
                 </div>
                 <div>
                     <img
-                        className="max-h-[650px] object-cover object-center"
+                        className="max-h-[750px]  object-cover object-[center_45%]"
                         src={apartment10}
                     />
                 </div>
