@@ -13,6 +13,9 @@ import MemberAnnouncements from "../Pages/Dashboard/Announcements/MemberAnnounce
 import ManageMembers from "../Pages/Dashboard/ManageMembers/ManageMembers";
 import AgreementRequests from "../Pages/Dashboard/AgreementRequests/AgreementRequests";
 import ManageCoupons from "../Pages/Dashboard/ManageCoupons/ManageCoupons";
+import Authentication from "../Pages/Authentication/Authentication/Authentication";
+import Login from "../Pages/Authentication/Login/Login";
+import Register from "../Pages/Authentication/Register/Register";
 
 const routes = createBrowserRouter([
     {
@@ -72,6 +75,20 @@ const routes = createBrowserRouter([
             {
                 path: "apartment",
                 element: <Appartment />,
+            },
+            {
+                path: "authentiction",
+                element: <Authentication />,
+                children: [
+                    {
+                        path: "",
+                        element: <Login />,
+                    },
+                    {
+                        path: "registration",
+                        element: <Register />,
+                    },
+                ],
             },
         ],
     },
