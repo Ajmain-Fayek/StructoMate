@@ -1,10 +1,9 @@
-import { Outlet } from "react-router";
+import SliderBanner from "../SliderBanner/SliderBanner";
 
 const Home = () => {
     return (
         <>
-            <h1>Home</h1>
-            <Outlet />
+            <SliderBanner />
         </>
     );
 };
