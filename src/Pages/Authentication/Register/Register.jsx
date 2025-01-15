@@ -7,8 +7,15 @@ import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
     const [toggle, setToggle] = useState(true);
+
     const handleToggle = () => {
         setToggle(!toggle);
+    };
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+        const form = new FormData(e.target);
+        console.log(form.get("image"));
     };
     return (
         <div>
@@ -21,13 +28,14 @@ const Register = () => {
                         <img className="max-w-92 shadow-2xl" src={buiding1} />
                     </div>
                     <div className="card rounded-none sm:order-1 bg-base-100 w-full shrink-0 shadow-2xl">
-                        <form className="card-body">
+                        <form onSubmit={handleRegister} className="card-body">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
                                 <input
                                     type="text"
+                                    autoComplete="name"
                                     name="name"
                                     placeholder="Full Name"
                                     className="input input-bordered"
@@ -40,8 +48,9 @@ const Register = () => {
                                 </label>
                                 <input
                                     type="email"
+                                    autoComplete="email"
                                     name="email"
-                                    placeholder="email"
+                                    placeholder="Email"
                                     className="input input-bordered"
                                     required
                                 />
@@ -52,11 +61,15 @@ const Register = () => {
                                 </label>
                                 <input
                                     type="file"
+                                    autoComplete="iamge"
                                     name="image"
                                     placeholder="image"
-                                    className=""
+                                    className="file-input file-input-bordered"
                                     required
                                 />
+                                <span className="text-red-700 text-xs mt-2 font-medium">
+                                    File types: .jpg .jpeg .png .webp
+                                </span>
                             </div>
                             <div className="form-control relative">
                                 <label className="label">
@@ -65,7 +78,8 @@ const Register = () => {
                                 <input
                                     type={toggle ? "password" : "text"}
                                     name="password"
-                                    placeholder="password"
+                                    autoComplete="new-password"
+                                    placeholder="New password"
                                     className="input input-bordered"
                                     required
                                 />

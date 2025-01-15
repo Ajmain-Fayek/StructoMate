@@ -9,6 +9,12 @@ const Login = () => {
     const handleToggle = () => {
         setToggle(!toggle);
     };
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const form = new FormData(e.target);
+        console.log(form.get("password"));
+    };
     return (
         <div>
             <div className="hero bg-base-200 min-h-screen py-5">
@@ -20,7 +26,7 @@ const Login = () => {
                         <img className="max-w-92 shadow-2xl" src={buiding1} />
                     </div>
                     <div className="card rounded-none bg-base-100 w-full shrink-0 shadow-2xl">
-                        <form className="card-body">
+                        <form onSubmit={handleLogin} className="card-body">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
@@ -29,6 +35,7 @@ const Login = () => {
                                     type="email"
                                     name="email"
                                     placeholder="email"
+                                    autoComplete="email"
                                     className="input input-bordered"
                                     required
                                 />
@@ -41,6 +48,7 @@ const Login = () => {
                                     type={toggle ? "password" : "text"}
                                     name="password"
                                     placeholder="password"
+                                    autoComplete="password"
                                     className="input input-bordered"
                                     required
                                 />
