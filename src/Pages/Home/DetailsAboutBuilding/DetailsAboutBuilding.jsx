@@ -9,8 +9,9 @@ const DetailsAboutBuilding = () => {
                 for example purpose. StructoMate does not have any relation with
                 pinned Address.
             </span>
+
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1625.8060265878707!2d90.43338351913543!3d23.825336799165722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c70054629b5f%3A0x67d74314951ef084!2sKrishnachura!5e0!3m2!1sen!2sbd!4v1737014436013!5m2!1sen!2sbd"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d228.00754185956026!2d90.38664733706003!3d23.885339364218073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c50039be6311%3A0x534b99dd8725f43e!2sHome%20sweet%20Cafe!5e0!3m2!1sen!2sbd!4v1737015926265!5m2!1sen!2sbd"
                 width="600"
                 height="450"
                 style={{ border: 0 }}
