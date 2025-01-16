@@ -14,7 +14,13 @@ import apartment10 from "../../../assets/Apartment/apartment (10).webp";
 const SliderBanner = () => {
     return (
         <div className="text-center">
-            <Carousel autoPlay={true} dynamicHeight={true} infiniteLoop={true}>
+            <Carousel
+                autoPlay={true}
+                swipeable={true}
+                dynamicHeight={true}
+                stopOnHover={false}
+                infiniteLoop={true}
+            >
                 <div>
                     <img
                         className="max-h-[750px] object-cover object-[center_65%]"
