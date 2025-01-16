@@ -10,6 +10,9 @@ export default {
             colors: {
                 overlay: "#001",
             },
+            screens: {
+                coupons: "785px",
+            },
         },
     },
     plugins: [require("daisyui")],

@@ -22,10 +22,12 @@ const routes = createBrowserRouter([
         path: "/",
         element: <MainLayout />,
         children: [
+            // Home layout
             {
                 path: "/",
                 element: <Home />,
             },
+            // Dashboard layout
             {
                 path: "dashboard",
                 element: <Dashboard />,
@@ -72,10 +74,12 @@ const routes = createBrowserRouter([
                     },
                 ],
             },
+            // Apartment Layout
             {
                 path: "apartment",
                 element: <Appartment />,
             },
+            // Login and Registration
             {
                 path: "authentiction",
                 element: <Authentication />,
