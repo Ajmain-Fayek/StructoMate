@@ -5,10 +5,10 @@ const AboutTheBuilding = () => {
             <div className="flex items-center flex-col lg:flex-row-reverse gap-10">
                 <img
                     src={building1}
-                    className="lg:w-5/12 w-2/3 rounded-lg shadow-2xl"
+                    className="lg:w-5/12 sm:w-10/12 w-full rounded-lg shadow-2xl"
                 />
-                <div className="lg:w-7/12 w-2/3">
-                    <h1 className="text-5xl font-bold font-Source-Code-Pro">
+                <div className="lg:w-7/12 sm:w-10/12 w-full">
+                    <h1 className="text-5xl font-bold  font-Source-Code-Pro">
                         About the Building
                     </h1>
                     <p className="mt-6 mb-4">
@@ -28,7 +28,9 @@ const AboutTheBuilding = () => {
                             Smart lighting and HVAC systems.
                         </li>
                         <li>
-                            <span className="font-semibold underline">Security:</span>{" "}
+                            <span className="font-semibold underline">
+                                Security:
+                            </span>{" "}
                             CCTV, keycard access, and real-time monitoring.
                         </li>
                         <li>
@@ -38,7 +40,9 @@ const AboutTheBuilding = () => {
                             Managed parking, storage, and recreational spaces.
                         </li>
                         <li>
-                            <span className="font-semibold underline">User Comfort:</span>{" "}
+                            <span className="font-semibold underline">
+                                User Comfort:
+                            </span>{" "}
                             High-speed internet and ergonomic layouts.
                         </li>
                         <li>
