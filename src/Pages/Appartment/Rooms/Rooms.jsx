@@ -105,16 +105,24 @@ const Rooms = () => {
     ];
 
     const [currentPage, setCurrentPage] = useState(1);
+    const [searchRent, setSearchRent] = useState("");
     const apartmentsPerPage = 6;
+
+    const filteredApartments = apartments
+        .filter(
+            (apartment) =>
+                apartment.rent <= parseInt(searchRent) || searchRent === ""
+        )
+        .sort((a, b) => b.rent - a.rent);
 
     const indexOfLastApartment = currentPage * apartmentsPerPage;
     const indexOfFirstApartment = indexOfLastApartment - apartmentsPerPage;
-    const currentApartments = apartments.slice(
+    const currentApartments = filteredApartments.slice(
         indexOfFirstApartment,
         indexOfLastApartment
     );
 
-    const totalPages = Math.ceil(apartments.length / apartmentsPerPage);
+    const totalPages = Math.ceil(filteredApartments.length / apartmentsPerPage);
 
     const handleNextPage = () => {
         if (currentPage < totalPages) {
@@ -128,8 +136,36 @@ const Rooms = () => {
         }
     };
 
+    const handleCLear = () => {
+        setSearchRent("");
+    };
+
+    console.log(currentApartments);
+
     return (
         <div>
+            <div className="flex justify-center px-2 my-4">
+                <input
+                    type="number"
+                    placeholder="Search by maximum rent"
+                    value={searchRent}
+                    onChange={(e) => setSearchRent(e.target.value)}
+                    className="input rounded-none border-[#002] ring-0 outline-none focus:outline-none focus:border-[#002] input-bordered w-full max-w-xs"
+                />
+                <button
+                    onClick={handleCLear}
+                    className="btn border border-[#002] rounded-none bg-[#002] hover:bg-[#003] text-white"
+                >
+                    Clear
+                </button>
+            </div>
+            {currentApartments.length === 0 && (
+                <div className="text-center flex justify-center p-2 bg-base-200">
+                    <span className="w-fit p-2 bg-red-50 border border-red-700 text-red-700">
+                        No apartment found within this range
+                    </span>
+                </div>
+            )}
             {currentApartments.map((a, index) => (
                 <div
                     key={a.apartmentNo}
