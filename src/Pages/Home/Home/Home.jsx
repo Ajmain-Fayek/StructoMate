@@ -1,4 +1,5 @@
 import AboutTheBuilding from "../AboutTheBuilding/AboutTheBuilding";
+import DetailsAboutBuilding from "../DetailsAboutBuilding/DetailsAboutBuilding";
 import SliderBanner from "../SliderBanner/SliderBanner";
 
 const Home = () => {
@@ -10,6 +11,9 @@ const Home = () => {
                 </div>
                 <div className="bg-base-200 py-20">
                     <AboutTheBuilding />
+                </div>
+                <div>
+                    <DetailsAboutBuilding />
                 </div>
             </div>
         </>
