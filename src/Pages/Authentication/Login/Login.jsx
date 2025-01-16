@@ -36,7 +36,7 @@ const Login = () => {
                                     name="email"
                                     placeholder="email"
                                     autoComplete="email"
-                                    className="input input-bordered"
+                                    className="input input-bordered rounded-none"
                                     required
                                 />
                             </div>
@@ -49,7 +49,7 @@ const Login = () => {
                                     name="password"
                                     placeholder="password"
                                     autoComplete="password"
-                                    className="input input-bordered"
+                                    className="input input-bordered rounded-none"
                                     required
                                 />
                                 {toggle ? (
@@ -69,14 +69,14 @@ const Login = () => {
                                 )}
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn bg-[#001] text-white hover:bg-[#003]">
+                                <button className="btn rounded-none bg-[#001] text-white hover:bg-[#003]">
                                     Login
                                 </button>
                             </div>
                         </form>
                         <div className="divider -mt-2">OR</div>
                         <div className="form-control px-8">
-                            <button className="btn bg-[#001] text-white hover:bg-[#003]">
+                            <button className="btn rounded-none bg-[#001] text-white hover:bg-[#003]">
                                 <FcGoogle size={"1.5rem"} />
                             </button>
                         </div>
