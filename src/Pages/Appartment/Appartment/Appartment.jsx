@@ -1,7 +1,9 @@
+import Rooms from "../Rooms/Rooms";
+
 const Appartment = () => {
     return (
         <>
-            <h1>Apartmetn</h1>
+            <Rooms />
         </>
     );
 };
