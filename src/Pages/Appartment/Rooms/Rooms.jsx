@@ -142,7 +142,7 @@ const Rooms = () => {
                         </li>
                     </ul>
                     <button className="btn rounded-none text-white hover:bg-[#004] bg-[#002]">
-                        Rent Apartment
+                        Rent This Apartment
                     </button>
                 </div>
             </div>

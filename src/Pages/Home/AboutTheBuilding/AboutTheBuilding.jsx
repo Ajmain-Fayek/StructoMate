@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import building1 from "../../../assets/Building/Building (1).webp";
 const AboutTheBuilding = () => {
     return (
@@ -52,9 +53,12 @@ const AboutTheBuilding = () => {
                             IoT-ready infrastructure for a seamless experience.
                         </li>
                     </ul>
-                    <button className="btn rounded-none text-white hover:bg-[#004] bg-[#002]">
+                    <Link
+                        to={"apartment"}
+                        className="btn rounded-none text-white hover:bg-[#004] bg-[#002]"
+                    >
                         Rent Apartment
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>
