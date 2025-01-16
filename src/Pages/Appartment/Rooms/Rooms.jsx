@@ -1,3 +1,4 @@
+import { useState } from "react";
 import apartment1 from "../../../assets/Apartment/apartment (1).webp";
 import apartment2 from "../../../assets/Apartment/apartment (2).webp";
 import apartment3 from "../../../assets/Apartment/apartment (3).webp";
@@ -103,51 +104,97 @@ const Rooms = () => {
         },
     ];
 
-    return apartments.map((a, index) => (
-        <div
-            key={a.apartmentNo}
-            className={` p-2 py-6  ${index % 2 === 0 ? "bg-base-200" : ""}`}
-        >
-            <div className="max-w-screen-2xl mx-auto flex items-center flex-col lg:flex-row-reverse gap-10">
-                <img
-                    src={a.apartmentImage}
-                    className="lg:w-5/12 sm:w-10/12 w-full rounded-lg shadow-2xl"
-                />
-                <div className="lg:w-7/12 sm:w-10/12 w-full">
-                    <h1 className="sm:text-5xl text-4xl font-bold  font-Source-Code-Pro">
-                        Apartment No: {a.apartmentNo}
-                    </h1>
-                    <p className="mt-6 mb-4">{a.details}</p>
-                    <h3 className="font-bold mt-4 text-xl font-Source-Code-Pro tracking-tight mb-2">
-                        Details:
-                    </h3>
-                    <ul className="space-y-2 mb-6">
-                        <li>
-                            <span className="font-semibold underline">
-                                Floor:
-                            </span>{" "}
-                            {a.floorNo}
-                        </li>
-                        <li>
-                            <span className="font-semibold underline">
-                                Block:
-                            </span>{" "}
-                            {a.blockName}
-                        </li>
-                        <li>
-                            <span className="font-semibold underline">
-                                Rent:
-                            </span>{" "}
-                            {a.rent} {" BDT / Month"}
-                        </li>
-                    </ul>
-                    <button className="btn rounded-none text-white hover:bg-[#004] bg-[#002]">
-                        Rent This Apartment
-                    </button>
+    const [currentPage, setCurrentPage] = useState(1);
+    const apartmentsPerPage = 6;
+
+    const indexOfLastApartment = currentPage * apartmentsPerPage;
+    const indexOfFirstApartment = indexOfLastApartment - apartmentsPerPage;
+    const currentApartments = apartments.slice(
+        indexOfFirstApartment,
+        indexOfLastApartment
+    );
+
+    const totalPages = Math.ceil(apartments.length / apartmentsPerPage);
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    return (
+        <div>
+            {currentApartments.map((a, index) => (
+                <div
+                    key={a.apartmentNo}
+                    className={`p-2 py-6 ${
+                        index % 2 === 0 ? "bg-base-200" : ""
+                    }`}
+                >
+                    <div className="max-w-screen-2xl mx-auto flex items-center flex-col lg:flex-row-reverse gap-10">
+                        <img
+                            src={a.apartmentImage}
+                            className="lg:w-5/12 sm:w-10/12 w-full rounded-lg shadow-2xl"
+                        />
+                        <div className="lg:w-7/12 sm:w-10/12 w-full">
+                            <h1 className="sm:text-5xl text-4xl font-bold font-Source-Code-Pro">
+                                Apartment No: {a.apartmentNo}
+                            </h1>
+                            <p className="mt-6 mb-4">{a.details}</p>
+                            <h3 className="font-bold mt-4 text-xl font-Source-Code-Pro tracking-tight mb-2">
+                                Details:
+                            </h3>
+                            <ul className="space-y-2 mb-6">
+                                <li>
+                                    <span className="font-semibold underline">
+                                        Floor:
+                                    </span>{" "}
+                                    {a.floorNo}
+                                </li>
+                                <li>
+                                    <span className="font-semibold underline">
+                                        Block:
+                                    </span>{" "}
+                                    {a.blockName}
+                                </li>
+                                <li>
+                                    <span className="font-semibold underline">
+                                        Rent:
+                                    </span>{" "}
+                                    {a.rent} {" BDT / Month"}
+                                </li>
+                            </ul>
+                            <button className="btn rounded-none text-white hover:bg-[#004] bg-[#002]">
+                                Rent This Apartment
+                            </button>
+                        </div>
+                    </div>
                 </div>
+            ))}
+            <div className="flex justify-center my-4">
+                <button
+                    onClick={handlePreviousPage}
+                    disabled={currentPage === 1}
+                    className="btn btn-sm rounded-none bg-[#001] hover:bg-[#003] text-white font-medium mx-2"
+                >
+                    Previous
+                </button>
+                <button
+                    onClick={handleNextPage}
+                    disabled={currentPage === totalPages}
+                    className="btn btn-sm rounded-none bg-[#001] hover:bg-[#003] text-white font-medium mx-2"
+                >
+                    Next
+                </button>
             </div>
         </div>
-    ));
+    );
 };
 
 export default Rooms;
