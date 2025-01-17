@@ -27,6 +27,10 @@
     color: rgba(0, 0, 204, 0.856);
 }
 
+.Toastify__toast-container {
+    z-index: 9999999;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

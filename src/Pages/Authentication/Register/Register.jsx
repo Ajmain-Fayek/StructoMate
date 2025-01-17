@@ -4,6 +4,7 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link } from "react-router";
 import { FcGoogle } from "react-icons/fc";
+import { Slide, toast } from "react-toastify";
 
 const Register = () => {
     const [toggle, setToggle] = useState(true);
@@ -12,10 +13,128 @@ const Register = () => {
         setToggle(!toggle);
     };
 
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
         const form = new FormData(e.target);
-        console.log(form.get("image"));
+        const name = form.get("name");
+        const email = form.get("email");
+        const image = form.get("image");
+        const password = form.get("password");
+
+        // Image file type validation
+        const validImageTypes = [
+            "image/jpeg",
+            "image/png",
+            "image/jpg",
+            "image/webp",
+        ];
+        if (!validImageTypes.includes(image.type)) {
+            toast.error("Invalid image type!", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Slide,
+            });
+            return;
+        }
+
+        // Password Validation
+        if (!/[a-z]/.test(password)) {
+            toast.error("Password: at least 1 lowercase letter.", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Slide,
+            });
+
+            return;
+        }
+        if (!/[A-Z]/.test(password)) {
+            toast.error("Password: at least 1 uppercase letter.", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Slide,
+            });
+            return;
+        }
+        if (password.length < 6) {
+            toast.error("Password: at least 6 characters long.", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Slide,
+            });
+            return;
+        }
+        console.log(import.meta.env.VITE_imagebbKey);
+        // Image Upload to imageBB
+        try {
+            const formData = new FormData();
+            formData.append("image", image);
+
+            const response = await fetch(
+                `https://api.imgbb.com/1/upload?key=${
+                    import.meta.env.VITE_imagebbKey
+                }`,
+                {
+                    method: "POST",
+                    body: formData,
+                }
+            );
+
+            const result = await response.json();
+            if (result.success) {
+                console.log("Image uploaded successfully:", result.data.url);
+            } else {
+                toast.error("Error uploading image", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Slide,
+                });
+                return;
+            }
+        } catch (error) {
+            toast.error("Error uploading image", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Slide,
+            });
+            console.error("Error:", error);
+            return;
+        }
     };
     return (
         <div>
