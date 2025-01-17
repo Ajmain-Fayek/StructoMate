@@ -5,7 +5,7 @@ import AdminAside from "../../../Components/Dashboard Aside/AdminAside";
 
 const Dashboard = () => {
     const user = {
-        role: "admin",
+        role: "member",
     };
 
     return (
@@ -21,7 +21,7 @@ const Dashboard = () => {
                 </div>
             </div>
         </>
-    ); 
+    );
 };
 
 export default Dashboard;

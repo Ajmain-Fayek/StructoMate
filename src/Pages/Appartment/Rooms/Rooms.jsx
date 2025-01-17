@@ -140,8 +140,6 @@ const Rooms = () => {
         setSearchRent("");
     };
 
-    console.log(currentApartments);
-
     return (
         <div>
             <div className="flex justify-center px-2 my-4">

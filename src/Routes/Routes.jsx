@@ -16,6 +16,9 @@ import ManageCoupons from "../Pages/Dashboard/ManageCoupons/ManageCoupons";
 import Authentication from "../Pages/Authentication/Authentication/Authentication";
 import Login from "../Pages/Authentication/Login/Login";
 import Register from "../Pages/Authentication/Register/Register";
+import PrivateRoute from "./PrivateRoutes";
+import AdminRoutes from "./AdminRoutes";
+import MemberRoutes from "./MemberRoutes";
 
 const routes = createBrowserRouter([
     {
@@ -30,7 +33,11 @@ const routes = createBrowserRouter([
             // Dashboard layout
             {
                 path: "dashboard",
-                element: <Dashboard />,
+                element: (
+                    <PrivateRoute>
+                        <Dashboard />
+                    </PrivateRoute>
+                ),
                 children: [
                     {
                         path: "myProfile",
@@ -38,39 +45,71 @@ const routes = createBrowserRouter([
                     },
                     {
                         path: "adminProfile",
-                        element: <AdminProfile />,
+                        element: (
+                            <AdminRoutes>
+                                <AdminProfile />
+                            </AdminRoutes>
+                        ),
                     },
                     {
                         path: "payments",
-                        element: <MakePayment />,
+                        element: (
+                            <MemberRoutes>
+                                <MakePayment />
+                            </MemberRoutes>
+                        ),
                     },
                     {
                         path: "paymentHistory",
-                        element: <PaymentHistory />,
+                        element: (
+                            <MemberRoutes>
+                                <PaymentHistory />
+                            </MemberRoutes>
+                        ),
                     },
                     {
                         path: "user-announcements",
                         element: <UserAnnouncements />,
                     },
                     {
-                        path: "Member-announcements",
-                        element: <MemberAnnouncements />,
+                        path: "member-announcements",
+                        element: (
+                            <MemberRoutes>
+                                <MemberAnnouncements />
+                            </MemberRoutes>
+                        ),
                     },
                     {
                         path: "makeAnnouncements",
-                        element: <AdminAnnouncements />,
+                        element: (
+                            <AdminRoutes>
+                                <AdminAnnouncements />
+                            </AdminRoutes>
+                        ),
                     },
                     {
                         path: "manage-members",
-                        element: <ManageMembers />,
+                        element: (
+                            <AdminRoutes>
+                                <ManageMembers />
+                            </AdminRoutes>
+                        ),
                     },
                     {
                         path: "agreement-requests",
-                        element: <AgreementRequests />,
+                        element: (
+                            <AdminRoutes>
+                                <AgreementRequests />
+                            </AdminRoutes>
+                        ),
                     },
                     {
                         path: "manage-coupons",
-                        element: <ManageCoupons />,
+                        element: (
+                            <AdminRoutes>
+                                <ManageCoupons />
+                            </AdminRoutes>
+                        ),
                     },
                 ],
             },
