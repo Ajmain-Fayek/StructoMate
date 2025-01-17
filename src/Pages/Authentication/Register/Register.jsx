@@ -87,11 +87,12 @@ const Register = () => {
             });
             return;
         }
-        console.log(import.meta.env.VITE_imagebbKey);
+
         // Image Upload to imageBB
         try {
             const formData = new FormData();
             formData.append("image", image);
+            const newImage = { image: "" };
 
             const response = await fetch(
                 `https://api.imgbb.com/1/upload?key=${
@@ -105,6 +106,7 @@ const Register = () => {
 
             const result = await response.json();
             if (result.success) {
+                newImage["image"] = result.data.url;
                 console.log("Image uploaded successfully:", result.data.url);
             } else {
                 toast.error("Error uploading image", {
@@ -120,6 +122,9 @@ const Register = () => {
                 });
                 return;
             }
+
+            // newImage URL
+            console.log(newImage);
         } catch (error) {
             toast.error("Error uploading image", {
                 position: "top-right",

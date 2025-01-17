@@ -1,19 +1,9 @@
 import { useState } from "react";
-import apartment1 from "../../../assets/Apartment/apartment (1).webp";
-import apartment2 from "../../../assets/Apartment/apartment (2).webp";
-import apartment3 from "../../../assets/Apartment/apartment (3).webp";
-import apartment4 from "../../../assets/Apartment/apartment (4).webp";
-import apartment5 from "../../../assets/Apartment/apartment (5).webp";
-import apartment6 from "../../../assets/Apartment/apartment (6).webp";
-import apartment7 from "../../../assets/Apartment/apartment (7).webp";
-import apartment8 from "../../../assets/Apartment/apartment (8).webp";
-import apartment9 from "../../../assets/Apartment/apartment (9).webp";
-import apartment10 from "../../../assets/Apartment/apartment (10).webp";
 
 const Rooms = () => {
     const apartments = [
         {
-            apartmentImage: apartment1,
+            apartmentImage: "https://i.ibb.co.com/yp6JT3C/Apartment-1.webp",
             floorNo: 1,
             blockName: "A",
             apartmentNo: "101",
@@ -22,7 +12,7 @@ const Rooms = () => {
                 "Cozy 1-bedroom apartment with modern amenities and a great view.",
         },
         {
-            apartmentImage: apartment2,
+            apartmentImage: "https://i.ibb.co.com/yQYkSFk/Apartment-2.webp",
             floorNo: 2,
             blockName: "A",
             apartmentNo: "202",
@@ -31,7 +21,7 @@ const Rooms = () => {
                 "Spacious 2-bedroom apartment with a balcony and ample sunlight.",
         },
         {
-            apartmentImage: apartment3,
+            apartmentImage: "https://i.ibb.co.com/4gdP81G/Apartment-3.webp",
             floorNo: 3,
             blockName: "B",
             apartmentNo: "303",
@@ -40,7 +30,7 @@ const Rooms = () => {
                 "Modern 1-bedroom apartment, perfect for young professionals.",
         },
         {
-            apartmentImage: apartment4,
+            apartmentImage: "https://i.ibb.co.com/sRVY17Y/Apartment-4.webp",
             floorNo: 4,
             blockName: "B",
             apartmentNo: "404",
@@ -49,7 +39,7 @@ const Rooms = () => {
                 "Elegant 2-bedroom apartment with premium fittings and parking space.",
         },
         {
-            apartmentImage: apartment5,
+            apartmentImage: "https://i.ibb.co.com/G7BWtkw/Apartment-5.webp",
             floorNo: 5,
             blockName: "C",
             apartmentNo: "505",
@@ -58,7 +48,7 @@ const Rooms = () => {
                 "Bright 3-bedroom apartment with a large living area and kitchen.",
         },
         {
-            apartmentImage: apartment6,
+            apartmentImage: "https://i.ibb.co.com/z5HqmYP/Apartment-6.webp",
             floorNo: 6,
             blockName: "C",
             apartmentNo: "606",
@@ -67,7 +57,7 @@ const Rooms = () => {
                 "Stylish 2-bedroom apartment with access to a swimming pool and gym.",
         },
         {
-            apartmentImage: apartment7,
+            apartmentImage: "https://i.ibb.co.com/KyfpYnR/Apartment-7.webp",
             floorNo: 7,
             blockName: "D",
             apartmentNo: "707",
@@ -76,7 +66,7 @@ const Rooms = () => {
                 "Luxury 3-bedroom apartment with smart home features and rooftop access.",
         },
         {
-            apartmentImage: apartment8,
+            apartmentImage: "https://i.ibb.co.com/0JvdcYm/Apartment-8.webp",
             floorNo: 8,
             blockName: "D",
             apartmentNo: "808",
@@ -85,7 +75,7 @@ const Rooms = () => {
                 "Premium 4-bedroom apartment ideal for large families, with great views.",
         },
         {
-            apartmentImage: apartment9,
+            apartmentImage: "https://i.ibb.co.com/JR23898/Apartment-9.webp",
             floorNo: 9,
             blockName: "E",
             apartmentNo: "909",
@@ -94,7 +84,7 @@ const Rooms = () => {
                 "Comfortable 2-bedroom apartment with close proximity to schools and parks.",
         },
         {
-            apartmentImage: apartment10,
+            apartmentImage: "https://i.ibb.co.com/bRCRtLW/Apartment-10.webp",
             floorNo: 10,
             blockName: "E",
             apartmentNo: "1010",
@@ -174,6 +164,8 @@ const Rooms = () => {
                     <div className="max-w-screen-2xl mx-auto flex items-center flex-col lg:flex-row-reverse gap-10">
                         <img
                             src={a.apartmentImage}
+                            alt={a.details}
+                            title={"Apartment No:"+a.apartmentNo+", "+a.details}
                             className="lg:w-5/12 sm:w-10/12 w-full rounded-lg shadow-2xl"
                         />
                         <div className="lg:w-7/12 sm:w-10/12 w-full">
