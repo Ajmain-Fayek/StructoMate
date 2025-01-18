@@ -13,7 +13,6 @@ import {
 
 import auth from "../../Firebase/Firebase";
 import useAxios from "../../Hooks/useAxios";
-import { use } from "react";
 
 // GOOGLE AUTH PROVIDER
 const googleProvider = new GoogleAuthProvider();
@@ -71,7 +70,6 @@ const AuthProvider = ({ children }) => {
                         `/users/${email}`,
                         token
                     );
-                    console.log(userData);
                     setUser(userData);
                     setLoading(false);
                     return;
@@ -92,7 +90,6 @@ const AuthProvider = ({ children }) => {
             setLoading(true);
 
             if (currentUser?.email) {
-                console.log("User detected:", currentUser.email);
                 await fetchUserWithRetries(currentUser.email);
             } else {
                 console.log(
@@ -108,8 +105,6 @@ const AuthProvider = ({ children }) => {
                 }
             }
         });
-
-        console.log(user);
 
         return () => unsubscribe(); // Clean up the listener on unmount
     }, [auth]);

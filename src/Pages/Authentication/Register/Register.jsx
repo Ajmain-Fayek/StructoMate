@@ -149,8 +149,6 @@ const Register = () => {
                                     console.log(err);
                                 }
                             }
-                            // Console Log
-                            console.log(addUser?.data);
                         } catch (err) {
                             toast.error("Error Can't Register", {
                                 position: "top-right",
@@ -195,9 +193,6 @@ const Register = () => {
                 });
                 return;
             }
-
-            // newImage URL
-            console.log(newImage);
         } catch (error) {
             toast.error("Error uploading image", {
                 position: "top-right",
