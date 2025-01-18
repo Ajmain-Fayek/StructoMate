@@ -19,6 +19,7 @@ import Register from "../Pages/Authentication/Register/Register";
 import PrivateRoute from "./PrivateRoutes";
 import AdminRoutes from "./AdminRoutes";
 import MemberRoutes from "./MemberRoutes";
+import axios from "axios";
 
 const routes = createBrowserRouter([
     {
@@ -117,17 +118,11 @@ const routes = createBrowserRouter([
             {
                 path: "apartment",
                 loader: async () => {
-                    const respose = await fetch(
+                    const response = await axios.get(
                         `${import.meta.env.VITE_baseAPI}/apartments`
                     );
-                    const data = await respose.json();
 
-                    if (data?.status === 200) {
-                        return data.result;
-                    } else {
-                        data["result"] = "Not Found";
-                        return data;
-                    }
+                    return response?.data?.result;
                 },
                 element: <Appartment />,
             },
