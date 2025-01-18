@@ -1,103 +1,14 @@
 import { useState } from "react";
+import { useLoaderData } from "react-router";
 
 const Rooms = () => {
-    const apartments = [
-        {
-            apartmentImage: "https://i.ibb.co.com/yp6JT3C/Apartment-1.webp",
-            floorNo: 1,
-            blockName: "A",
-            apartmentNo: "101",
-            rent: 10000,
-            details:
-                "Cozy 1-bedroom apartment with modern amenities and a great view.",
-        },
-        {
-            apartmentImage: "https://i.ibb.co.com/yQYkSFk/Apartment-2.webp",
-            floorNo: 2,
-            blockName: "A",
-            apartmentNo: "202",
-            rent: 12000,
-            details:
-                "Spacious 2-bedroom apartment with a balcony and ample sunlight.",
-        },
-        {
-            apartmentImage: "https://i.ibb.co.com/4gdP81G/Apartment-3.webp",
-            floorNo: 3,
-            blockName: "B",
-            apartmentNo: "303",
-            rent: 14000,
-            details:
-                "Modern 1-bedroom apartment, perfect for young professionals.",
-        },
-        {
-            apartmentImage: "https://i.ibb.co.com/sRVY17Y/Apartment-4.webp",
-            floorNo: 4,
-            blockName: "B",
-            apartmentNo: "404",
-            rent: 16000,
-            details:
-                "Elegant 2-bedroom apartment with premium fittings and parking space.",
-        },
-        {
-            apartmentImage: "https://i.ibb.co.com/G7BWtkw/Apartment-5.webp",
-            floorNo: 5,
-            blockName: "C",
-            apartmentNo: "505",
-            rent: 18000,
-            details:
-                "Bright 3-bedroom apartment with a large living area and kitchen.",
-        },
-        {
-            apartmentImage: "https://i.ibb.co.com/z5HqmYP/Apartment-6.webp",
-            floorNo: 6,
-            blockName: "C",
-            apartmentNo: "606",
-            rent: 20000,
-            details:
-                "Stylish 2-bedroom apartment with access to a swimming pool and gym.",
-        },
-        {
-            apartmentImage: "https://i.ibb.co.com/KyfpYnR/Apartment-7.webp",
-            floorNo: 7,
-            blockName: "D",
-            apartmentNo: "707",
-            rent: 22000,
-            details:
-                "Luxury 3-bedroom apartment with smart home features and rooftop access.",
-        },
-        {
-            apartmentImage: "https://i.ibb.co.com/0JvdcYm/Apartment-8.webp",
-            floorNo: 8,
-            blockName: "D",
-            apartmentNo: "808",
-            rent: 24000,
-            details:
-                "Premium 4-bedroom apartment ideal for large families, with great views.",
-        },
-        {
-            apartmentImage: "https://i.ibb.co.com/JR23898/Apartment-9.webp",
-            floorNo: 9,
-            blockName: "E",
-            apartmentNo: "909",
-            rent: 15000,
-            details:
-                "Comfortable 2-bedroom apartment with close proximity to schools and parks.",
-        },
-        {
-            apartmentImage: "https://i.ibb.co.com/bRCRtLW/Apartment-10.webp",
-            floorNo: 10,
-            blockName: "E",
-            apartmentNo: "1010",
-            rent: 25000,
-            details:
-                "Exclusive penthouse with 5 bedrooms, private terrace, and luxury amenities.",
-        },
-    ];
+    const apartments = useLoaderData();
 
     const [currentPage, setCurrentPage] = useState(1);
     const [searchRent, setSearchRent] = useState("");
     const apartmentsPerPage = 6;
 
+    // Filter Apartment
     const filteredApartments = apartments
         .filter(
             (apartment) =>
@@ -105,6 +16,7 @@ const Rooms = () => {
         )
         .sort((a, b) => b.rent - a.rent);
 
+    // Pagination
     const indexOfLastApartment = currentPage * apartmentsPerPage;
     const indexOfFirstApartment = indexOfLastApartment - apartmentsPerPage;
     const currentApartments = filteredApartments.slice(
@@ -126,6 +38,7 @@ const Rooms = () => {
         }
     };
 
+    // Clear Search query
     const handleCLear = () => {
         setSearchRent("");
     };
@@ -165,7 +78,12 @@ const Rooms = () => {
                         <img
                             src={a.apartmentImage}
                             alt={a.details}
-                            title={"Apartment No:"+a.apartmentNo+", "+a.details}
+                            title={
+                                "Apartment No:" +
+                                a.apartmentNo +
+                                ", " +
+                                a.details
+                            }
                             className="lg:w-5/12 sm:w-10/12 w-full rounded-lg shadow-2xl"
                         />
                         <div className="lg:w-7/12 sm:w-10/12 w-full">

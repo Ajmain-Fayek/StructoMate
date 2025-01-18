@@ -116,6 +116,19 @@ const routes = createBrowserRouter([
             // Apartment Layout
             {
                 path: "apartment",
+                loader: async () => {
+                    const respose = await fetch(
+                        `${import.meta.env.VITE_baseAPI}/apartments`
+                    );
+                    const data = await respose.json();
+
+                    if (data?.status === 200) {
+                        return data.result;
+                    } else {
+                        data["result"] = "Not Found";
+                        return data;
+                    }
+                },
                 element: <Appartment />,
             },
             // Login and Registration
