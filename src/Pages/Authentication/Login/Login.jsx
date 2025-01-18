@@ -5,6 +5,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import useAuthContext from "../../../Hooks/useAuthContext";
+import { Slide, toast } from "react-toastify";
 const Login = () => {
     const { signInUser } = useAuthContext();
     const [toggle, setToggle] = useState(true);
@@ -21,15 +22,37 @@ const Login = () => {
         try {
             const signIn = await signInUser(email, password);
             if (signIn?.user) {
+                toast.success(`Welcome Back ${signIn?.user?.displayName}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Slide,
+                });
                 return navigate("/");
             }
         } catch (err) {
-            console.log(err);
+            toast.error("Invalid email/password", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Slide,
+            });
+            // console.log(err);
         }
     };
     return (
         <div>
-            <div className="hero bg-base-200 min-h-screen py-5">
+            <div className="hero login bg-base-200 py-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-screen-md px-1">
                     <div className="text-center place-content-center lg:text-left">
                         <h1 className="text-2xl mb-4 font-bold font-Source-Code-Pro">

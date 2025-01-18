@@ -1,15 +1,18 @@
-const MemberRoutes = ({ children }) => {
-    const user = { role: "member" };
+import useAuthContext from "../Hooks/useAuthContext";
 
-    if (user.role !== "member") {
-        return (
-            <div className="p-1 border border-red-700 text-center bg-red-50 text-red-700">
-                Access Denied!
-            </div>
-        );
+const MemberRoutes = ({ children }) => {
+    const { user } = useAuthContext();
+    
+
+    if (user?.role === "member") {
+        return children;
     }
 
-    return  children ;
+    return (
+        <div className="p-1 border border-red-700 text-center bg-red-50 text-red-700">
+            Access Denied!
+        </div>
+    );
 };
 
 export default MemberRoutes;

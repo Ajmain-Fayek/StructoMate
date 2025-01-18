@@ -9,7 +9,7 @@ import useAxios from "../../../Hooks/useAxios";
 import useAuthContext from "../../../Hooks/useAuthContext";
 
 const Register = () => {
-    const { signUpWithEmailAndPassword, updateUserInfo, logOutUser } =
+    const { signUpWithEmailAndPassword, updateUserInfo, logOutUser, setUser } =
         useAuthContext();
     const [toggle, setToggle] = useState(true);
     const axiosFetch = useAxios();
@@ -131,6 +131,7 @@ const Register = () => {
                                 password: password,
                             });
                             if (addUser?.data?.insertedId) {
+                                await logOutUser();
                                 toast.success("Register Success", {
                                     position: "top-right",
                                     autoClose: 5000,
@@ -142,12 +143,11 @@ const Register = () => {
                                     theme: "light",
                                     transition: Slide,
                                 });
-                                try {
-                                    await logOutUser();
-                                    return navigate("/authentiction");
-                                } catch (err) {
-                                    console.log(err);
-                                }
+                                navigate("/authentiction");
+                                await new Promise((resolve) =>
+                                    setTimeout(resolve, 2500)
+                                );
+                                location.reload();
                             }
                         } catch (err) {
                             toast.error("Error Can't Register", {
@@ -211,7 +211,7 @@ const Register = () => {
     };
     return (
         <div>
-            <div className="hero bg-base-200 min-h-screen py-5">
+            <div className="hero bg-base-200 register py-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-screen-md px-1">
                     <div className="place-content-center text-center sm:order-2 lg:text-left">
                         <h1 className="text-2xl mb-4 font-bold font-Source-Code-Pro">

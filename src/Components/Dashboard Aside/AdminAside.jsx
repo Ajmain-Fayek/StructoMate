@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 
 const AdminAside = () => {
     return (
-        <div className="grid admin-aside space-y-4 border border-gray-400 shadow-md p-4">
+        <div className="grid admin-aside space-y-4 bg-white border border-gray-400 shadow-md p-4">
             <NavLink
                 className="border-b border-gray-400 p-2"
                 to={"adminProfile"}

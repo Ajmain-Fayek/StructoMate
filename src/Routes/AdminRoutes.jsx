@@ -1,15 +1,17 @@
-const AdminRoutes = ({ children }) => {
-    const user = { role: "dmin" };
+import useAuthContext from "../Hooks/useAuthContext";
 
-    if (user.role !== "admin") {
-        return (
-            <div className="p-1 border border-red-700 text-center bg-red-50 text-red-700">
-                Access Denied!
-            </div>
-        );
+const AdminRoutes = ({ children }) => {
+    const { user } = useAuthContext();
+
+    if (user?.role === "admin") {
+        return children;
     }
 
-    return children;
+    return (
+        <div className="p-1 border border-red-700 text-center bg-red-50 text-red-700">
+            Access Denied!
+        </div>
+    );
 };
 
 export default AdminRoutes;

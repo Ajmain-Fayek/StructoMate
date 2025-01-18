@@ -107,7 +107,7 @@ const AuthProvider = ({ children }) => {
         });
 
         return () => unsubscribe(); // Clean up the listener on unmount
-    }, [auth]);
+    }, [axiosSecure]);
 
     const authInfo = {
         signUpWithEmailAndPassword,

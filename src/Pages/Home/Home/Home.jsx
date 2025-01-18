@@ -15,7 +15,7 @@ const Home = () => {
                         <Coupons />
                     </div>
                 </div>
-                <div className="bg-base-200 py-5">
+                <div className="bg-white py-5">
                     <AboutTheBuilding />
                 </div>
                 <div>

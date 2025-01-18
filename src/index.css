@@ -8,6 +8,15 @@
     font-family: "Inter", serif;
 }
 
+.mainlayout {
+    min-height: calc(100vh - 285px);
+}
+.loading_screen,
+.login,
+.register {
+    min-height: calc(100vh - 283px);
+}
+
 .nav-menu .active {
     background: transparent;
     text-decoration: underline;

@@ -51,7 +51,7 @@ const Rooms = () => {
 
     return (
         <div>
-            <div className="flex justify-center px-2 my-4">
+            <div className="flex justify-center px-2 py-4">
                 <input
                     type="number"
                     placeholder="Search by maximum rent"
@@ -77,7 +77,7 @@ const Rooms = () => {
                 <div
                     key={a.apartmentNo}
                     className={`p-2 py-6 ${
-                        index % 2 === 0 ? "bg-base-200" : ""
+                        index % 2 === 0 ? "bg-white" : "bg-base-200"
                     }`}
                 >
                     <div className="max-w-screen-2xl mx-auto flex items-center flex-col lg:flex-row-reverse gap-10">
@@ -127,7 +127,7 @@ const Rooms = () => {
                     </div>
                 </div>
             ))}
-            <div className="flex justify-center my-4">
+            <div className="flex justify-center py-4">
                 <button
                     onClick={handlePreviousPage}
                     disabled={currentPage === 1}
