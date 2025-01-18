@@ -43,6 +43,12 @@ const Rooms = () => {
         setSearchRent("");
     };
 
+    // handle search query
+    const handleSearchRent = (e) => {
+        setCurrentPage(1);
+        setSearchRent(e.target.value);
+    };
+
     return (
         <div>
             <div className="flex justify-center px-2 my-4">
@@ -50,7 +56,7 @@ const Rooms = () => {
                     type="number"
                     placeholder="Search by maximum rent"
                     value={searchRent}
-                    onChange={(e) => setSearchRent(e.target.value)}
+                    onChange={handleSearchRent}
                     className="input rounded-none border-[#002] ring-0 outline-none focus:outline-none focus:border-[#002] input-bordered w-full max-w-xs"
                 />
                 <button
