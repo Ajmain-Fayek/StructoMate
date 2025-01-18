@@ -19,7 +19,7 @@ import Register from "../Pages/Authentication/Register/Register";
 import PrivateRoute from "./PrivateRoutes";
 import AdminRoutes from "./AdminRoutes";
 import MemberRoutes from "./MemberRoutes";
-import axios from "axios";
+import useAxios from "../Hooks/useAxios";
 
 const routes = createBrowserRouter([
     {
@@ -118,9 +118,8 @@ const routes = createBrowserRouter([
             {
                 path: "apartment",
                 loader: async () => {
-                    const response = await axios.get(
-                        `${import.meta.env.VITE_baseAPI}/apartments`
-                    );
+                    const axiosFetch = useAxios();
+                    const response = await axiosFetch.get("/apartments");
 
                     return response?.data?.result;
                 },

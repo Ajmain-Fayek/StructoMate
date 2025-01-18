@@ -1,26 +1,29 @@
+import useAuthContext from "../../../../Hooks/useAuthContext";
+
 const MemberAndUserProfile = () => {
-    const user = {
-        name: "Ajmain Fayek",
-        image: "https://i.ibb.co.com/S6Py5nS/Logo.webp",
-        email: "ajmainfayek733@gmail.com",
-        role: "member",
-        agreementAcceptanceDate: "15/01/2025",
-        rentedApartment: {
-            floore: "3rd",
-            block: "3f",
-            roomNo: 305,
-        },
-        rent: 3500,
-    };
+    const { user } = useAuthContext();
+    // {
+    //     name: "Ajmain Fayek",
+    //     image: "https://i.ibb.co.com/S6Py5nS/Logo.webp",
+    //     email: "ajmainfayek733@gmail.com",
+    //     role: "member",
+    //     agreementAcceptanceDate: "15/01/2025",
+    //     rentedApartment: {
+    //         floore: "3rd",
+    //         block: "3f",
+    //         roomNo: 305,
+    //     },
+    //     rent: 3500,
+    // };
     return (
         <div className="space-y-4">
             <img
-                src={user?.image}
+                src={user?.photoURL}
                 className="h-40 max-w-64"
-                title={"Photo of " + user?.name}
-                alt={"Photo of " + user?.name}
+                title={"Photo of " + user?.displayName}
+                alt={"Photo of " + user?.displayName}
             />
-            <h3 className="text-2xl font-semibold">{user?.name}</h3>
+            <h3 className="text-2xl font-semibold">{user?.displayName}</h3>
             <label htmlFor="a" className="flex gap-2">
                 <span className="font-medium">Email: </span>
                 <a

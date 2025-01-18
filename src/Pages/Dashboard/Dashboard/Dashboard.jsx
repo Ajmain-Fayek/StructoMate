@@ -2,11 +2,10 @@ import { Outlet } from "react-router";
 import UserAside from "../../../Components/Dashboard Aside/UserAside";
 import MemberAside from "../../../Components/Dashboard Aside/MemberAside";
 import AdminAside from "../../../Components/Dashboard Aside/AdminAside";
+import useAuthContext from "../../../Hooks/useAuthContext";
 
 const Dashboard = () => {
-    const user = {
-        role: "member",
-    };
+    const { user } = useAuthContext();
 
     return (
         <>

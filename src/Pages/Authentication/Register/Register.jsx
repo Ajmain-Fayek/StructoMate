@@ -2,12 +2,18 @@ import { useState } from "react";
 import buiding1 from "../../../assets/Building/Building (1).webp";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import { Slide, toast } from "react-toastify";
+import useAxios from "../../../Hooks/useAxios";
+import useAuthContext from "../../../Hooks/useAuthContext";
 
 const Register = () => {
+    const { signUpWithEmailAndPassword, updateUserInfo, logOutUser } =
+        useAuthContext();
     const [toggle, setToggle] = useState(true);
+    const axiosFetch = useAxios();
+    const navigate = useNavigate();
 
     const handleToggle = () => {
         setToggle(!toggle);
@@ -107,7 +113,74 @@ const Register = () => {
             const result = await response.json();
             if (result.success) {
                 newImage["image"] = result.data.url;
-                console.log("Image uploaded successfully:", result.data.url);
+                try {
+                    const register = await signUpWithEmailAndPassword(
+                        email,
+                        password
+                    );
+                    if (register?.user) {
+                        const obj = {
+                            displayName: name,
+                            photoURL: newImage?.image,
+                        };
+                        try {
+                            await updateUserInfo(obj);
+                            const addUser = await axiosFetch.post("/users", {
+                                ...obj,
+                                email: email,
+                                password: password,
+                            });
+                            if (addUser?.data?.insertedId) {
+                                toast.success("Register Success", {
+                                    position: "top-right",
+                                    autoClose: 5000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    theme: "light",
+                                    transition: Slide,
+                                });
+                                try {
+                                    await logOutUser();
+                                    return navigate("/authentiction");
+                                } catch (err) {
+                                    console.log(err);
+                                }
+                            }
+                            // Console Log
+                            console.log(addUser?.data);
+                        } catch (err) {
+                            toast.error("Error Can't Register", {
+                                position: "top-right",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                                transition: Slide,
+                            });
+                            console.log(err);
+                        }
+                    }
+                } catch (err) {
+                    toast.error("Error Can't Register", {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Slide,
+                    });
+                    console.log(err);
+                    return;
+                }
             } else {
                 toast.error("Error uploading image", {
                     position: "top-right",

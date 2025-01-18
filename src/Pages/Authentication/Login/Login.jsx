@@ -2,18 +2,30 @@ import { useState } from "react";
 import buiding1 from "../../../assets/Building/Building (1).webp";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
+import useAuthContext from "../../../Hooks/useAuthContext";
 const Login = () => {
+    const { signInUser } = useAuthContext();
     const [toggle, setToggle] = useState(true);
     const handleToggle = () => {
         setToggle(!toggle);
     };
+    const navigate = useNavigate();
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         const form = new FormData(e.target);
-        console.log(form.get("password"));
+        const password = form.get("password");
+        const email = form.get("email");
+        try {
+            const signIn = await signInUser(email, password);
+            if (signIn?.user) {
+                return navigate("/");
+            }
+        } catch (err) {
+            console.log(err);
+        }
     };
     return (
         <div>
