@@ -42,11 +42,15 @@ const AdminProfile = () => {
 
             <label htmlFor="p" className="flex gap-2">
                 <span className="font-medium">Available Rooms:</span>
-                <p>{data?.availableRooms + "%" || "N/A"}</p>
+                <p className="text-red-600">
+                    {data?.availableRooms + "%" || "N/A"}
+                </p>
             </label>
             <label htmlFor="p" className="flex gap-2">
                 <span className="font-medium">Occupied Rooms:</span>
-                <p>{data?.occupiedRooms + "%" || "N/A"}</p>
+                <p className="text-green-600">
+                    {data?.occupiedRooms + "%" || "N/A"}
+                </p>
             </label>
             <label htmlFor="p" className="flex gap-2">
                 <span className="font-medium">Total Users: </span>

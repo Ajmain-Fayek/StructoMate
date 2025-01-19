@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxios from "../../../../Hooks/useAxios";
 import useAuthContext from "../../../../Hooks/useAuthContext";
+import { format } from "date-fns";
 
 const UserAnnouncements = () => {
     const axiosFetch = useAxios();
@@ -20,7 +21,7 @@ const UserAnnouncements = () => {
         return res;
     }, []);
     return (
-        <div>
+        <div className="space-y-2">
             <div className="space-y-2">
                 <h3>
                     <span className="font-semibold">Agreements:</span>{" "}
@@ -42,12 +43,16 @@ const UserAnnouncements = () => {
                 )}
             </div>
             {/* Annoucement sections */}
-            <div className="bg-base-200">
-                <div className="flex shadow-md gap-2 bg-base-200 p-2 justify-between">
-                    <h3 className="font-semibold">Announcemenet Title</h3>
-                    <span>Date..</span>
+            <div className="bg-base-200 p-2 space-y-2">
+                <div className="relative shadow-md gap-2 bg-base-200">
+                    <h3 className="font-medium p-2 pr-24 w-full bg-white">
+                        title
+                    </h3>
+                    <span className="text-xs absolute w-30 bg-white p-2 top-1 right-0">
+                        {format(new Date(), "dd MMM, yyyy")}
+                    </span>
                 </div>
-                <p className="p-2">Details,...</p>
+                <p className="p-2 w-full bg-white">Details....</p>
             </div>
         </div>
     );
