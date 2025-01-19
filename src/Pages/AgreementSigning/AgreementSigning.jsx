@@ -5,7 +5,7 @@ const AgreementSigning = () => {
     const data = useLoaderData();
     const { user } = useAuthContext();
     return (
-        <div className="py-4">
+        <div className="p-4">
             <div className="max-w-3xl mx-auto p-8 bg-white shadow-md rounded-md font-sans">
                 <h1 className="text-2xl font-bold text-center mb-4">
                     Residential Lease Agreement
@@ -189,7 +189,7 @@ const AgreementSigning = () => {
                 </section>
 
                 <section className="mt-8 text-center">
-                    <button className="btn btn-wide rounded-none bg-[#002] hover:bg-[#004] text-white">
+                    <button className="btn w-24 rounded-none bg-[#002] hover:bg-[#004] text-white">
                         Apply
                     </button>
                 </section>
