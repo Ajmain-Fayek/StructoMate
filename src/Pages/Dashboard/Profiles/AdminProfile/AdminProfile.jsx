@@ -9,7 +9,8 @@ const AdminProfile = () => {
 
     useEffect(() => {
         const data = async () => {
-            const { data } = await axiosFetch.get("/admin");
+            const token = localStorage.getItem("token");
+            const { data } = await axiosFetch.post("/admin", { token });
             setData(data);
         };
         return data;
