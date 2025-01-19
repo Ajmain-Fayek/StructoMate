@@ -1,9 +1,75 @@
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import useAuthContext from "../../Hooks/useAuthContext";
+import useAxios from "../../Hooks/useAxios";
+import { format, formatISO } from "date-fns";
+import { Slide, toast } from "react-toastify";
 
 const AgreementSigning = () => {
     const data = useLoaderData();
     const { user } = useAuthContext();
+    const axiosFetch = useAxios();
+    const navigate = useNavigate();
+
+    // Handle Agreement
+    const handleAgreement = async () => {
+        const newAgreement = {
+            tenant: user?.displayName,
+            tenantEmail: user?.email,
+            tenantImage: user?.photoURL,
+            agreementSigningDate: formatISO(new Date()),
+            apartmentDetails: { ...data },
+        };
+        const token = localStorage.getItem("token");
+        // console.log({ newAgreement, token });
+        try {
+            const { data: agrement } = await axiosFetch.post("/agreements", {
+                newAgreement,
+                token,
+            });
+            console.log(agrement?.insertedId);
+            if (agrement?.insertedId) {
+                toast.success("Agreement Signed", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Slide,
+                });
+                navigate("/dashboard");
+            }
+        } catch (err) {
+            if (err?.response?.data?.message) {
+                toast.error(err?.response?.data?.message, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Slide,
+                });
+            } else {
+                toast.error("Couldn't Sign Agreement.", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Slide,
+                });
+                console.log(err);
+            }
+        }
+    };
     return (
         <div className="p-4">
             <div className="max-w-3xl mx-auto p-8 bg-white shadow-md rounded-md font-sans">
@@ -14,7 +80,7 @@ const AgreementSigning = () => {
                     This Residential Lease Agreement &quot;Agreement&quot; is
                     made and entered into on{" "}
                     <strong className="text-black">
-                        {new Date().toLocaleDateString()}
+                        {format(new Date(), "dd MMM, yyyy")}
                     </strong>{" "}
                     by and between{" "}
                     <strong className="text-black">StructoMate</strong>{" "}
@@ -22,7 +88,7 @@ const AgreementSigning = () => {
                     <strong className="text-black">{user?.displayName}</strong>{" "}
                     &quot;Tenant&quot;.
                 </p>
-
+                {/* -========================== Apartment Details -========================== */}
                 <section className="mb-6">
                     <h2 className="text-xl font-semibold text-gray-800 mb-2">
                         1. Apartment Details
@@ -89,9 +155,9 @@ const AgreementSigning = () => {
                     </h2>
                     <p className="text-gray-700">
                         The Tenant shall pay a security deposit of{" "}
-                        <strong>${data?.rent}</strong>, refundable at the end of
-                        the lease term, provided there are no damages or
-                        outstanding dues.
+                        <strong>{data?.rent + " BDT"}</strong>, refundable at
+                        the end of the lease term, provided there are no damages
+                        or outstanding dues.
                     </p>
                 </section>
                 {/* -========================== Utilities & Services -========================== */}
@@ -128,7 +194,7 @@ const AgreementSigning = () => {
                         maintenance.
                     </p>
                 </section>
-
+                {/* -========================== Use of Premises -========================== */}
                 <section className="mb-6">
                     <h2 className="text-xl font-semibold text-gray-800 mb-2">
                         7. Use of Premises
@@ -139,7 +205,7 @@ const AgreementSigning = () => {
                         prohibited.
                     </p>
                 </section>
-
+                {/* -========================== Termination -========================== */}
                 <section className="mb-6">
                     <h2 className="text-xl font-semibold text-gray-800 mb-2">
                         8. Termination
@@ -149,7 +215,7 @@ const AgreementSigning = () => {
                         <strong>30</strong> days&apos; notice.
                     </p>
                 </section>
-
+                {/* -========================== Additional Terms -========================== */}
                 <section className="mb-6">
                     <h2 className="text-xl font-semibold text-gray-800 mb-2">
                         9. Additional Terms
@@ -165,7 +231,7 @@ const AgreementSigning = () => {
                         </li>
                     </ul>
                 </section>
-
+                {/* -========================== Signatures -========================== */}
                 <section>
                     <h2 className="text-xl font-semibold text-gray-800 mb-2">
                         10. Signatures
@@ -184,12 +250,15 @@ const AgreementSigning = () => {
                         <strong>Tenant&apos;s Signature:</strong>{" "}
                         {user?.displayName}, {user?.email}
                         <br />
-                        Date: {new Date().toLocaleDateString()}
+                        Date: {format(new Date(), "dd MMM, yyyy")}
                     </p>
                 </section>
-
+                {/* -========================== Apply -========================== */}
                 <section className="mt-8 text-center">
-                    <button className="btn w-24 rounded-none bg-[#002] hover:bg-[#004] text-white">
+                    <button
+                        onClick={handleAgreement}
+                        className="btn w-24 rounded-none bg-[#002] hover:bg-[#004] text-white"
+                    >
                         Apply
                     </button>
                 </section>
