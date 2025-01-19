@@ -1,19 +1,19 @@
+import { useEffect, useState } from "react";
 import useAuthContext from "../../../../Hooks/useAuthContext";
+import useAxios from "../../../../Hooks/useAxios";
 
 const AdminProfile = () => {
     const { user } = useAuthContext();
-    // const user = {
-    //     name: "Ajmain Fayek",
-    //     image: "https://i.ibb.co.com/S6Py5nS/Logo.webp",
-    //     email: "ajmainfayek733@gmail.com",
-    //     role: "admin",
-    //     totalRooms: 24,
-    //     roomAvailablePercentage: "40%",
-    //     roomOccupaidePercentage: "60%",
-    //     totalUsers: 80,
-    //     totalMembers: 14,
-    // };
+    const axiosFetch = useAxios();
+    const [data, setData] = useState();
 
+    useEffect(() => {
+        const data = async () => {
+            const { data } = await axiosFetch.get("/admin");
+            setData(data);
+        };
+        return data;
+    }, []);
     return (
         <div className="space-y-4">
             <img
@@ -36,24 +36,24 @@ const AdminProfile = () => {
             </label>
             <label htmlFor="p" className="flex gap-2">
                 <span className="font-medium">Total Rooms: </span>
-                <p>{user?.totalRooms || "N/A"}</p>
+                <p>{data?.totalRooms || "N/A"}</p>
             </label>
 
             <label htmlFor="p" className="flex gap-2">
                 <span className="font-medium">Available Rooms:</span>
-                <p>{user?.roomAvailablePercentage || "N/A"}</p>
+                <p>{data?.availableRooms + "%" || "N/A"}</p>
             </label>
             <label htmlFor="p" className="flex gap-2">
                 <span className="font-medium">Occupied Rooms:</span>
-                <p>{user?.roomOccupaidePercentage || "N/A"}</p>
+                <p>{data?.occupiedRooms + "%" || "N/A"}</p>
             </label>
             <label htmlFor="p" className="flex gap-2">
                 <span className="font-medium">Total Users: </span>
-                <p>{user?.totalUsers || "N/A"}</p>
+                <p>{data?.users || "N/A"}</p>
             </label>
             <label htmlFor="p" className="flex gap-2">
                 <span className="font-medium">Total Members:</span>
-                <p>{user?.totalMembers || "N/A"}</p>
+                <p>{data?.members || "N/A"}</p>
             </label>
         </div>
     );

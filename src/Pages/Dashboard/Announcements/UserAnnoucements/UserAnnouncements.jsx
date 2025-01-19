@@ -29,15 +29,25 @@ const UserAnnouncements = () => {
                 <p className="font-semibold">
                     Status:{" "}
                     <span className="text-yellow-600 font-normal">
-                        Pending...
+                        {(data?.agreementFound && "Pending...") || "N/A"}
                     </span>
                 </p>
-                <p className="font-semibold">
-                    Tips:{" "}
-                    <span className="text-green-700 font-normal">
-                        The fruits of patience are sweet.
-                    </span>
-                </p>
+                {data?.agreementFound && (
+                    <p className="font-semibold">
+                        Tips:{" "}
+                        <span className="text-green-700 font-normal">
+                            The fruits of patience are sweet.
+                        </span>
+                    </p>
+                )}
+            </div>
+            {/* Annoucement sections */}
+            <div className="bg-base-200">
+                <div className="flex shadow-md gap-2 bg-base-200 p-2 justify-between">
+                    <h3 className="font-semibold">Announcemenet Title</h3>
+                    <span>Date..</span>
+                </div>
+                <p className="p-2">Details,...</p>
             </div>
         </div>
     );
