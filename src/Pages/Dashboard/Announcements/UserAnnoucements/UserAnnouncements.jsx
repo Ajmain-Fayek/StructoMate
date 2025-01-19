@@ -6,20 +6,20 @@ import { format } from "date-fns";
 const UserAnnouncements = () => {
     const axiosFetch = useAxios();
     const { user } = useAuthContext();
-    const [data, setData] = useState();
+    const [data, setData] = useState({});
 
     useEffect(() => {
-        const res = async () => {
+        const fetchData = async () => {
             const token = localStorage.getItem("token");
             const response = await axiosFetch.post(`/users/agreements/`, {
                 token,
                 tenantEmail: user?.email,
             });
-            // console.log(response?.data);
-            return setData(response?.data);
+            console.log(response?.data);
+            setData({ ...response?.data });
         };
-        return res;
-    }, []);
+        fetchData();
+    }, [axiosFetch, user?.email]);
     return (
         <div className="space-y-2">
             <div className="space-y-2">

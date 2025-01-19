@@ -8,13 +8,13 @@ const AdminProfile = () => {
     const [data, setData] = useState();
 
     useEffect(() => {
-        const data = async () => {
+        const fetchData = async () => {
             const token = localStorage.getItem("token");
             const { data } = await axiosFetch.post("/admin", { token });
             setData(data);
         };
-        return data;
-    }, []);
+        fetchData();
+    }, [axiosFetch]);
     return (
         <div className="space-y-4">
             <img
