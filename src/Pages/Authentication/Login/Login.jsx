@@ -6,14 +6,17 @@ import { Link, useNavigate } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import useAuthContext from "../../../Hooks/useAuthContext";
 import { Slide, toast } from "react-toastify";
+import useAxios from "../../../Hooks/useAxios";
 const Login = () => {
-    const { signInUser } = useAuthContext();
+    const { signInUser, signInWithGoogle, logOutUser } = useAuthContext();
     const [toggle, setToggle] = useState(true);
     const handleToggle = () => {
         setToggle(!toggle);
     };
     const navigate = useNavigate();
+    const axiosFetch = useAxios();
 
+    // Handle Email & Pass login
     const handleLogin = async (e) => {
         e.preventDefault();
         const form = new FormData(e.target);
@@ -47,7 +50,72 @@ const Login = () => {
                 theme: "light",
                 transition: Slide,
             });
-            // console.log(err);
+            console.log(err);
+        }
+    };
+
+    // Handle Goodle login
+    const handleGoogleSignup = async () => {
+        const data = {};
+        try {
+            const { user } = await signInWithGoogle();
+            data["email"] = user?.email;
+            data["displayName"] = user?.displayName;
+            data["photoURL"] = user?.photoURL;
+
+            const checkUser = await axiosFetch.get(
+                `/users/exists/${user?.email}`
+            );
+
+            if (checkUser?.status === 200) {
+                toast.success(`Welcome Back ${user?.displayName}`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Slide,
+                });
+                navigate("/");
+            }
+
+            console.log(user, checkUser);
+        } catch (err) {
+            if (err?.status === 400) {
+                try {
+                    const addUser = await axiosFetch.post("/users", data);
+                    if (addUser?.data?.insertedId) {
+                        toast.success(`Welcome ${data?.displayName}`, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                            transition: Slide,
+                        });
+                        navigate("/");
+                    }
+                } catch (err) {
+                    toast.error("Can't login usign Google", {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Slide,
+                    });
+                    console.log(err);
+                }
+            }
         }
     };
     return (
@@ -111,7 +179,10 @@ const Login = () => {
                         </form>
                         <div className="divider -mt-2">OR</div>
                         <div className="form-control px-8">
-                            <button className="btn rounded-none bg-[#001] text-white hover:bg-[#003]">
+                            <button
+                                onClick={handleGoogleSignup}
+                                className="btn rounded-none bg-[#001] text-white hover:bg-[#003]"
+                            >
                                 <FcGoogle size={"1.5rem"} />
                             </button>
                         </div>

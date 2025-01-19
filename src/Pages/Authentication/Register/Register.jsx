@@ -3,13 +3,12 @@ import buiding1 from "../../../assets/Building/Building (1).webp";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router";
-import { FcGoogle } from "react-icons/fc";
 import { Slide, toast } from "react-toastify";
 import useAxios from "../../../Hooks/useAxios";
 import useAuthContext from "../../../Hooks/useAuthContext";
 
 const Register = () => {
-    const { signUpWithEmailAndPassword, updateUserInfo, logOutUser, setUser } =
+    const { signUpWithEmailAndPassword, updateUserInfo, logOutUser } =
         useAuthContext();
     const [toggle, setToggle] = useState(true);
     const axiosFetch = useAxios();
@@ -297,12 +296,6 @@ const Register = () => {
                                 </button>
                             </div>
                         </form>
-                        <div className="divider -mt-2">OR</div>
-                        <div className="form-control px-8">
-                            <button className="btn rounded-none bg-[#001] text-white hover:bg-[#003]">
-                                <FcGoogle size={"1.5rem"} />
-                            </button>
-                        </div>
                         <div className="text-center p-4">
                             A member of{" "}
                             <span className="font-Source-Code-Pro font-medium">

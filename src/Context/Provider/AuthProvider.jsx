@@ -74,7 +74,7 @@ const AuthProvider = ({ children }) => {
                     setLoading(false);
                     return;
                 } catch (error) {
-                    await logOutUser();
+                    // await logOutUser();
                     console.warn("Retrying user fetch...", retries, error);
                     retries -= 1;
                     await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait 1 second
@@ -107,7 +107,7 @@ const AuthProvider = ({ children }) => {
         });
 
         return () => unsubscribe(); // Clean up the listener on unmount
-    }, [axiosSecure]);
+    }, [axiosSecure, auth]);
 
     const authInfo = {
         signUpWithEmailAndPassword,
