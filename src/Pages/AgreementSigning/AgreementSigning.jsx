@@ -12,6 +12,20 @@ const AgreementSigning = () => {
 
     // Handle Agreement
     const handleAgreement = async () => {
+        if (!user) {
+            toast.error("Login/Register to Sign Agreement", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Slide,
+            });
+            return navigate(`/authentiction`);
+        }
         const newAgreement = {
             tenant: user?.displayName,
             tenantEmail: user?.email,
@@ -26,7 +40,7 @@ const AgreementSigning = () => {
                 newAgreement,
                 token,
             });
-            console.log(agrement?.insertedId);
+            // console.log(agrement?.insertedId);
             if (agrement?.insertedId) {
                 toast.success("Agreement Signed", {
                     position: "top-right",
@@ -85,7 +99,9 @@ const AgreementSigning = () => {
                     by and between{" "}
                     <strong className="text-black">StructoMate</strong>{" "}
                     &quot;Landlord&quot; and{" "}
-                    <strong className="text-black">{user?.displayName}</strong>{" "}
+                    <strong className="text-black">
+                        {user?.displayName || "N/A"}
+                    </strong>{" "}
                     &quot;Tenant&quot;.
                 </p>
                 {/* -========================== Apartment Details -========================== */}
@@ -248,7 +264,8 @@ const AgreementSigning = () => {
                     </p>
                     <p className="mt-4">
                         <strong>Tenant&apos;s Signature:</strong>{" "}
-                        {user?.displayName}, {user?.email}
+                        {user?.displayName || "___________________________"},{" "}
+                        {user?.email || "___________________________"}
                         <br />
                         Date: {format(new Date(), "dd MMM, yyyy")}
                     </p>

@@ -21,6 +21,7 @@ import AdminRoutes from "./AdminRoutes";
 import MemberRoutes from "./MemberRoutes";
 import useAxios from "../Hooks/useAxios";
 import AgreementSigning from "../Pages/AgreementSigning/AgreementSigning";
+import useAuthContext from "../Hooks/useAuthContext";
 
 const axiosFetch = useAxios();
 
@@ -152,11 +153,7 @@ const routes = createBrowserRouter([
                     );
                     return response?.data?.result;
                 },
-                element: (
-                    <PrivateRoute>
-                        <AgreementSigning />
-                    </PrivateRoute>
-                ),
+                element: <AgreementSigning />,
             },
         ],
     },
