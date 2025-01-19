@@ -20,6 +20,9 @@ import PrivateRoute from "./PrivateRoutes";
 import AdminRoutes from "./AdminRoutes";
 import MemberRoutes from "./MemberRoutes";
 import useAxios from "../Hooks/useAxios";
+import AgreementSigning from "../Pages/AgreementSigning/AgreementSigning";
+
+const axiosFetch = useAxios();
 
 const routes = createBrowserRouter([
     {
@@ -118,7 +121,7 @@ const routes = createBrowserRouter([
             {
                 path: "apartment",
                 loader: async () => {
-                    const axiosFetch = useAxios();
+                    // const axiosFetch = useAxios();
                     const response = await axiosFetch.get("/apartments");
 
                     return response?.data?.result;
@@ -139,6 +142,21 @@ const routes = createBrowserRouter([
                         element: <Register />,
                     },
                 ],
+            },
+            {
+                path: "apartment/:apartment_id",
+                loader: async ({ params }) => {
+                    // const axiosFetch = useAxios();
+                    const response = await axiosFetch.get(
+                        `/apartments/${params?.apartment_id}`
+                    );
+                    return response?.data?.result;
+                },
+                element: (
+                    <PrivateRoute>
+                        <AgreementSigning />
+                    </PrivateRoute>
+                ),
             },
         ],
     },

@@ -8,7 +8,7 @@ import useAuthContext from "../../../Hooks/useAuthContext";
 import { Slide, toast } from "react-toastify";
 import useAxios from "../../../Hooks/useAxios";
 const Login = () => {
-    const { signInUser, signInWithGoogle, logOutUser } = useAuthContext();
+    const { signInUser, signInWithGoogle } = useAuthContext();
     const [toggle, setToggle] = useState(true);
     const handleToggle = () => {
         setToggle(!toggle);
@@ -82,7 +82,7 @@ const Login = () => {
                 navigate("/");
             }
 
-            console.log(user, checkUser);
+            // console.log(user, checkUser);
         } catch (err) {
             if (err?.status === 400) {
                 try {

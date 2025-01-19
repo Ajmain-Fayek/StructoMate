@@ -1,8 +1,12 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
+import useAuthContext from "../../../Hooks/useAuthContext";
+import { Slide, toast } from "react-toastify";
 
 const Rooms = () => {
     const apartments = useLoaderData();
+    const navigate = useNavigate();
+    const { user } = useAuthContext();
 
     const [currentPage, setCurrentPage] = useState(1);
     const [searchRent, setSearchRent] = useState("");
@@ -47,6 +51,25 @@ const Rooms = () => {
     const handleSearchRent = (e) => {
         setCurrentPage(1);
         setSearchRent(e.target.value);
+    };
+
+    // Handle rent this aparment
+    const handleRentThisApartment = (id) => {
+        if (!user) {
+            toast.error("Login/Register to Sign Agreement", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Slide,
+            });
+            return navigate(`/authentiction`);
+        }
+        return navigate(`/apartment/${id}`);
     };
 
     return (
@@ -120,7 +143,10 @@ const Rooms = () => {
                                     {a.rent} {" BDT / Month"}
                                 </li>
                             </ul>
-                            <button className="btn rounded-none text-white hover:bg-[#004] bg-[#002]">
+                            <button
+                                onClick={() => handleRentThisApartment(a._id)}
+                                className="btn rounded-none text-white hover:bg-[#004] bg-[#002]"
+                            >
                                 Rent This Apartment
                             </button>
                         </div>

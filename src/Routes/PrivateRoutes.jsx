@@ -14,7 +14,7 @@ const PrivateRoute = ({ children }) => {
     }
 
     if (!user) {
-        return navigate("authentiction");
+        return navigate("/authentiction");
     }
 
     return children;
