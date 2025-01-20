@@ -18,7 +18,7 @@ const MemberAnnouncements = () => {
     }, [axiosFetch]);
     return (
         <div className="space-y-2">
-            {data &&
+            {data && data.length > 0 ? (
                 data.map((a) => (
                     <div
                         key={a._id}
@@ -46,7 +46,12 @@ const MemberAnnouncements = () => {
                             </p>
                         </div>
                     </div>
-                ))}
+                ))
+            ) : (
+                <div className="text-center bg-base-200 p-2 shadow-md">
+                    There is no Announcements yet.
+                </div>
+            )}
         </div>
     );
 };

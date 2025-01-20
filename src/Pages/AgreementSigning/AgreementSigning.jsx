@@ -27,6 +27,7 @@ const AgreementSigning = () => {
             return navigate(`/authentiction`);
         }
         const newAgreement = {
+            tenant_id: user?._id,
             tenant: user?.displayName,
             tenantEmail: user?.email,
             tenantImage: user?.photoURL,

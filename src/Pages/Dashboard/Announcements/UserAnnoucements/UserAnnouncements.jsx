@@ -48,7 +48,7 @@ const UserAnnouncements = () => {
             </div>
             {/* Annoucement sections */}
             <div className="space-y-2">
-                {data2 &&
+                {data2 && data2.length > 0 ? (
                     data2.map((a) => (
                         <div
                             key={a._id}
@@ -76,7 +76,12 @@ const UserAnnouncements = () => {
                                 </p>
                             </div>
                         </div>
-                    ))}
+                    ))
+                ) : (
+                    <div className="text-center bg-base-200 p-2 shadow-md">
+                        There is no Announcements yet.
+                    </div>
+                )}
             </div>
         </div>
     );

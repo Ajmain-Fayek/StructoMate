@@ -21,6 +21,7 @@ import AdminRoutes from "./AdminRoutes";
 import MemberRoutes from "./MemberRoutes";
 import useAxios from "../Hooks/useAxios";
 import AgreementSigning from "../Pages/AgreementSigning/AgreementSigning";
+import UserRoutes from "./UserRoutes";
 
 const axiosFetch = useAxios();
 
@@ -73,7 +74,11 @@ const routes = createBrowserRouter([
                     },
                     {
                         path: "user-announcements",
-                        element: <UserAnnouncements />,
+                        element: (
+                            <UserRoutes>
+                                <UserAnnouncements />
+                            </UserRoutes>
+                        ),
                     },
                     {
                         path: "member-announcements",
