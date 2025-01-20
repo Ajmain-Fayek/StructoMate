@@ -1,15 +1,50 @@
 import { format, formatISO } from "date-fns";
+import useAxios from "../../../../Hooks/useAxios";
+import { Slide, toast } from "react-toastify";
 
 const AdminAnnouncements = () => {
-    const handleAnnouncements = (e) => {
+    const axiosFetch = useAxios();
+    const handleAnnouncements = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const data = {
+        const newAnnouncement = {
             title: formData.get("title"),
             details: formData.get("details"),
             date: formatISO(new Date()),
+            type: formData.get("type"),
         };
-        console.log(data);
+        const token = localStorage.getItem("token");
+        const result = await axiosFetch.post("/makeAnnouncement", {
+            newAnnouncement,
+            token,
+        });
+
+        if (result?.data?.insertedId) {
+            toast.success(`Announcement Posted to ${newAnnouncement?.type}`, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Slide,
+            });
+            e.target.reset();
+        } else {
+            toast.error("Couldn't post announcemnet.", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Slide,
+            });
+        }
     };
     return (
         <div>
@@ -25,6 +60,21 @@ const AdminAnnouncements = () => {
                         <span className="text-xs absolute w-30 bg-white p-2 top-1 right-0">
                             {format(new Date(), "dd MMM, yyyy")}
                         </span>
+                    </div>
+                    <div className="">
+                        <select
+                            name="type"
+                            defaultValue={""}
+                            required
+                            className="w-full p-2 shadow-md rounded-none focus:outline-none border-b border-gray-300"
+                        >
+                            <option value="" disabled>
+                                Select User Type
+                            </option>
+                            <option value={"user"}>User</option>
+                            <option value={"member"}>Member</option>
+                            <option value={"all"}>All</option>
+                        </select>
                     </div>
                     <textarea
                         name="details"

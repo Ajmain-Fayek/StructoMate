@@ -15,7 +15,6 @@ const UserAnnouncements = () => {
                 token,
                 tenantEmail: user?.email,
             });
-            console.log(response?.data);
             setData({ ...response?.data });
         };
         fetchData();
