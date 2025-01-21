@@ -61,10 +61,13 @@ const AgreementSigning = () => {
         const token = localStorage.getItem("token");
         // console.log({ newAgreement, token });
         try {
-            const { data: agrement } = await axiosFetch.post("/agreements", {
-                newAgreement,
-                token,
-            });
+            const { data: agrement } = await axiosFetch.post(
+                "/create/agreements",
+                {
+                    newAgreement,
+                    token,
+                }
+            );
             // console.log(agrement?.insertedId);
             if (agrement?.insertedId) {
                 toast.success("Agreement Signed", {
@@ -94,7 +97,7 @@ const AgreementSigning = () => {
                     transition: Slide,
                 });
             } else {
-                toast.error("Couldn't Sign Agreement.", {
+                toast.error("Internal Server Error", {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
