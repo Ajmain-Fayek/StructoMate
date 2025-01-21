@@ -59,7 +59,7 @@ const MemberAndUserProfile = () => {
                         agreements?.result?.agreementSigningDate &&
                         format(
                             new Date(agreements?.result?.agreementSigningDate),
-                            "dd MM, yyyy"
+                            "dd MMM, yyyy"
                         )) ||
                         "N/A"}
                 </p>

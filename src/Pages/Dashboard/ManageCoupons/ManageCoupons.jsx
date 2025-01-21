@@ -6,6 +6,8 @@ import { Slide, toast } from "react-toastify";
 import useAxios from "../../../Hooks/useAxios";
 
 const ManageCoupons = () => {
+    const [toggle, setToggle] = useState(false);
+    const [isHidden, setIsHidden] = useState(true);
     const [coupons, setCoupons] = useState([]);
     const [startDate, setStartDate] = useState(new Date());
     const axiosFetch = useAxios();
@@ -23,6 +25,17 @@ const ManageCoupons = () => {
     useEffect(() => {
         fetchCoupons();
     }, [axiosFetch]);
+
+    useEffect(() => {
+        if (toggle) {
+            setIsHidden(false);
+        } else {
+            const timeout = setTimeout(() => setIsHidden(true), 200); // Match the transition duration
+            return () => clearTimeout(timeout);
+        }
+    }, [toggle]);
+
+    const handleToggle = () => setToggle((prev) => !prev);
 
     const handleRemove = async ({ _id }) => {
         try {
@@ -67,6 +80,7 @@ const ManageCoupons = () => {
         const formData = new FormData(e.target);
         const newCoupon = {
             heading: formData.get("heading"),
+            percentage: formData.get("discountPercentage"),
             description: formData.get("description"),
             code: formData.get("couponCode"),
             validity: formatISO(startDate),
@@ -133,7 +147,20 @@ const ManageCoupons = () => {
     return (
         <div className="space-y-4">
             {/* Coupon Creation Form */}
-            <section className="border border-gray-300 p-4 shadow-lg">
+            <button
+                onClick={handleToggle}
+                className="bg-[#002] text-white p-2 mt-4 btn rounded-none hover:bg-[#004]"
+            >
+                {toggle ? "Close" : "Create"} Coupon
+            </button>
+
+            <section
+                className={`border border-gray-300 p-4 shadow-lg transition-all delay-100 duration-300 ease-in-out transform ${
+                    toggle
+                        ? " opacity-100 scale-100"
+                        : " opacity-0 scale-50 pointer-events-none"
+                }${isHidden ? " hidden" : " "}`}
+            >
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                     <input
                         className="border p-2"
@@ -147,6 +174,13 @@ const ManageCoupons = () => {
                         placeholder="Description (Max - 30 characters)"
                         name="description"
                         maxLength={30}
+                        required
+                    />
+                    <input
+                        className="border p-2"
+                        placeholder="Discount Percentage (Ex: 25)"
+                        name="discountPercentage"
+                        type="number"
                         required
                     />
                     <input
