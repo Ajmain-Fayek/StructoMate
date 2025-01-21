@@ -144,13 +144,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: "apartment/:apartment_id",
-                loader: async ({ params }) => {
-                    // const axiosFetch = useAxios();
-                    const response = await axiosFetch.get(
-                        `/apartments/${params?.apartment_id}`
-                    );
-                    return response?.data?.result;
-                },
+                loader: ({ params }) => params.apartment_id,
                 element: <AgreementSigning />,
             },
         ],

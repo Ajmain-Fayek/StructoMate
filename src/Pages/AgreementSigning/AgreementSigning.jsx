@@ -3,12 +3,35 @@ import useAuthContext from "../../Hooks/useAuthContext";
 import useAxios from "../../Hooks/useAxios";
 import { format, formatISO } from "date-fns";
 import { Slide, toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
 const AgreementSigning = () => {
     const data = useLoaderData();
+    const [apartments, setAgreements] = useState();
     const { user } = useAuthContext();
     const axiosFetch = useAxios();
     const navigate = useNavigate();
+    console.log(data);
+
+    const fetchApartments = async () => {
+        try {
+            const response = await axiosFetch.get(`/apartments/${data}`);
+            setAgreements(response?.data?.result || []);
+        } catch (error) {
+            console.error("Failed to fetch Apartments Request:", error);
+        }
+    };
+    useEffect(() => {
+        fetchApartments();
+    }, [axiosFetch]);
+
+    if (!apartments) {
+        return (
+            <div className="text-center flex items-center loading_screen">
+                <span className="loading mx-auto text-center loading-ring loading-lg"></span>
+            </div>
+        );
+    }
 
     // Handle Agreement
     const handleAgreement = async () => {
@@ -113,27 +136,27 @@ const AgreementSigning = () => {
                     </h2>
                     <div className="mb-4">
                         <img
-                            src={data?.apartmentImage}
-                            alt={`Apartment ${data?.apartmentNo}`}
+                            src={apartments?.apartmentImage}
+                            alt={`Apartment ${apartments?.apartmentNo}`}
                             className="w-full h-64 object-cover rounded-md"
                         />
                     </div>
                     <ul className="list-disc pl-6 text-gray-700">
                         <li>
                             <strong>Apartment Number:</strong>{" "}
-                            {data?.apartmentNo}
+                            {apartments?.apartmentNo}
                         </li>
                         <li>
-                            <strong>Block Name:</strong> {data?.blockName}
+                            <strong>Block Name:</strong> {apartments?.blockName}
                         </li>
                         <li>
-                            <strong>Floor Number:</strong> {data?.floorNo}
+                            <strong>Floor Number:</strong> {apartments?.floorNo}
                         </li>
                         <li>
-                            <strong>Rent:</strong> {data?.rent} {" BDT / Month"}
+                            <strong>Rent:</strong> {apartments?.rent} {" BDT / Month"}
                         </li>
                         <li>
-                            <strong>Details:</strong> {data?.details}
+                            <strong>Details:</strong> {apartments?.details}
                         </li>
                     </ul>
                 </section>
