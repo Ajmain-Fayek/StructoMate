@@ -125,12 +125,6 @@ const routes = createBrowserRouter([
             // Apartment Layout
             {
                 path: "apartment",
-                loader: async () => {
-                    // const axiosFetch = useAxios();
-                    const response = await axiosFetch.get("/apartments");
-
-                    return response?.data?.result;
-                },
                 element: <Appartment />,
             },
             // Login and Registration
