@@ -28,8 +28,6 @@ const MemberAndUserProfile = () => {
         }
     }, [user]);
 
-    console.log(agreements);
-
     return (
         <div className="space-y-4">
             <img
