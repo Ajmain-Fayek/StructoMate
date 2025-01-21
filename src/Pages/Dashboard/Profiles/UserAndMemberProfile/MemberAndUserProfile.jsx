@@ -1,20 +1,35 @@
+import { useEffect, useState } from "react";
 import useAuthContext from "../../../../Hooks/useAuthContext";
+import useAxios from "../../../../Hooks/useAxios";
+import { format } from "date-fns";
 
 const MemberAndUserProfile = () => {
     const { user } = useAuthContext();
-    // {
-    //     name: "Ajmain Fayek",
-    //     image: "https://i.ibb.co.com/S6Py5nS/Logo.webp",
-    //     email: "ajmainfayek733@gmail.com",
-    //     role: "member",
-    //     agreementAcceptanceDate: "15/01/2025",
-    //     rentedApartment: {
-    //         floore: "3rd",
-    //         block: "3f",
-    //         roomNo: 305,
-    //     },
-    //     rent: 3500,
-    // };
+    const axiosFetch = useAxios();
+    const [agreements, setAgreements] = useState([]);
+
+    const fetchAgreements = async () => {
+        try {
+            const token = localStorage.getItem("token");
+            const { data } = await axiosFetch.post("/member/agreements", {
+                token,
+                tenantEmail: user?.email,
+                tenant_id: user?._id,
+            });
+            setAgreements(data || []);
+        } catch (error) {
+            console.error("Failed to fetch Agreements Request:", error);
+        }
+    };
+
+    useEffect(() => {
+        if (user?.role === "member") {
+            fetchAgreements();
+        }
+    }, [user]);
+
+    console.log(agreements);
+
     return (
         <div className="space-y-4">
             <img
@@ -40,35 +55,54 @@ const MemberAndUserProfile = () => {
                 <p>{user?.role || "N/A"}</p>
             </label>
             <label htmlFor="p" className="flex gap-2">
-                <span className="font-medium">Agreement Date: </span>
+                <span className="font-medium">Agreement Signed Date: </span>
                 <p>
-                    {(user?.role === "member" &&
-                        user?.agreementAcceptanceDate) ||
+                    {(agreements &&
+                        agreements?.result?.agreementSigningDate &&
+                        format(
+                            new Date(agreements?.result?.agreementSigningDate),
+                            "dd MM, yyyy"
+                        )) ||
+                        "N/A"}
+                </p>
+            </label>
+            <label htmlFor="p" className="flex gap-2">
+                <span className="font-medium">
+                    Agreement Acceptation Date:{" "}
+                </span>
+                <p>
+                    {(agreements &&
+                        agreements?.result?.agreementCheckedDate &&
+                        format(
+                            new Date(agreements?.result?.agreementCheckedDate),
+                            "dd MMM, yyyy"
+                        )) ||
                         "N/A"}
                 </p>
             </label>
 
             <label htmlFor="ul" className="flex gap-2">
                 <span className="font-medium">Apartment Details:</span>
-                <ul className="flex gap-1 flex-wrap">
+                <ul className="flex gap-1 flex-wrap flex-grow">
                     <li>
                         Floor:{" "}
-                        {(user?.role === "member" &&
-                            user?.rentedApartment?.floore) ||
+                        {(agreements &&
+                            agreements?.result?.apartmentDetails?.floorNo) ||
                             "N/A"}
                         ,
                     </li>
                     <li>
                         Block:{" "}
-                        {(user?.role === "member" &&
-                            user?.rentedApartment?.block) ||
+                        {(agreements &&
+                            agreements?.result?.apartmentDetails?.blockName) ||
                             "N/A"}
                         ,
                     </li>
                     <li>
                         Room:{" "}
-                        {(user?.role === "member" &&
-                            user?.rentedApartment?.roomNo) ||
+                        {(agreements &&
+                            agreements?.result?.apartmentDetails
+                                ?.apartmentNo) ||
                             "N/A"}
                     </li>
                 </ul>
@@ -76,9 +110,8 @@ const MemberAndUserProfile = () => {
             <label htmlFor="p" className="flex gap-2">
                 <span className="font-medium">Rent/Month:</span>
                 <p>
-                    {(user?.role === "member" &&
-                        user?.rent &&
-                        user?.rent + " BDT") ||
+                    {(agreements &&
+                        agreements?.result?.apartmentDetails?.rent + " BDT") ||
                         "N/A"}
                 </p>
             </label>

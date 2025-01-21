@@ -15,7 +15,7 @@ const Dashboard = () => {
                     {user?.role === "member" && <MemberAside />}
                     {user?.role === "admin" && <AdminAside />}
                 </div>
-                <div className="border bg-white border-gray-400 shadow-md min-h-20 md:col-span-8 sm:col-span-7 col-span-12 p-2 sm:p-4">
+                <div className="border bg-white border-gray-400 shadow-md md:col-span-8 sm:col-span-7 col-span-12 p-2 sm:p-4">
                     <Outlet />
                 </div>
             </div>

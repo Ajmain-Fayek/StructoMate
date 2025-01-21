@@ -9,43 +9,57 @@ const UserAnnouncements = () => {
     const [data, setData] = useState({});
     const [data2, setData2] = useState();
 
+    const fetchData = async () => {
+        const token = localStorage.getItem("token");
+        const response2 = await axiosFetch.post("/get/userAnnouncement", {
+            token,
+        });
+        setData2(response2?.data);
+
+        const { data } = await axiosFetch.post(`/users/agreements/`, {
+            token,
+            tenantEmail: user?.email,
+            tenant_id: user?._id,
+        });
+        setData({ ...data });
+    };
+
     useEffect(() => {
-        const fetchData = async () => {
-            const token = localStorage.getItem("token");
-            const response = await axiosFetch.post(`/users/agreements/`, {
-                token,
-                tenantEmail: user?.email,
-            });
-            setData({ ...response?.data });
-            const response2 = await axiosFetch.post("/get/userAnnouncement", {
-                token,
-            });
-            setData2(response2?.data);
-        };
         fetchData();
     }, [axiosFetch, user?.email]);
+
     return (
         <div className="space-y-2">
-            <div className="space-y-2">
-                <h3>
-                    <span className="font-semibold">Agreements:</span>{" "}
-                    {data?.agreementFound || "N/A"}
-                </h3>
-                <p className="font-semibold">
-                    Status:{" "}
-                    <span className="text-yellow-600 font-normal">
-                        {(data?.agreementFound && "Pending...") || "N/A"}
-                    </span>
-                </p>
-                {data?.agreementFound && (
-                    <p className="font-semibold">
-                        Tips:{" "}
-                        <span className="text-green-700 font-normal">
-                            The fruits of patience are sweet.
-                        </span>
+            {data?.result && (
+                <div className="space-y-2 p-2 border border-gray-300 shadow-md mb-4">
+                    <p className="text-yellow-600">
+                        <span className="font-semibold text-black">
+                            Status:
+                        </span>{" "}
+                        {data?.result?.status || "N/A"}
                     </p>
-                )}
-            </div>
+                    <p className="">
+                        <span className="font-semibold text-black">
+                            Agreement Signing Date:
+                        </span>{" "}
+                        {format(
+                            new Date(data?.result?.agreementSigningDate),
+                            "dd MMM, yyyy"
+                        ) || "N/A"}
+                    </p>
+                    <p className="">
+                        <span className="font-semibold text-black">
+                            Agreement Checked Date:
+                        </span>{" "}
+                        {(data?.result?.agreementCheckedDate &&
+                            format(
+                                new Date(data?.result?.agreementCheckedDate),
+                                "dd MMM, yyyy"
+                            )) ||
+                            "N/A"}
+                    </p>
+                </div>
+            )}
             {/* Annoucement sections */}
             <div className="space-y-2">
                 {data2 && data2.length > 0 ? (
