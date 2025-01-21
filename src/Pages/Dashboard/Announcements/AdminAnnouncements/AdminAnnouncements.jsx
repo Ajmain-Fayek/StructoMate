@@ -66,7 +66,7 @@ const AdminAnnouncements = () => {
                             name="type"
                             defaultValue={""}
                             required
-                            className="w-full p-2 shadow-md rounded-none focus:outline-none border-b border-gray-300"
+                            className="w-full cursor-pointer p-2 shadow-md rounded-none focus:outline-none border-b border-gray-300"
                         >
                             <option value="" disabled>
                                 Select User Type

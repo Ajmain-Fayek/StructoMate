@@ -56,7 +56,7 @@ const AgreementSigning = () => {
             tenantEmail: user?.email,
             tenantImage: user?.photoURL,
             agreementSigningDate: formatISO(new Date()),
-            apartmentDetails: { ...data },
+            apartmentDetails: apartments,
         };
         const token = localStorage.getItem("token");
         // console.log({ newAgreement, token });
@@ -153,7 +153,8 @@ const AgreementSigning = () => {
                             <strong>Floor Number:</strong> {apartments?.floorNo}
                         </li>
                         <li>
-                            <strong>Rent:</strong> {apartments?.rent} {" BDT / Month"}
+                            <strong>Rent:</strong> {apartments?.rent}{" "}
+                            {" BDT / Month"}
                         </li>
                         <li>
                             <strong>Details:</strong> {apartments?.details}

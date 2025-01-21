@@ -109,6 +109,7 @@ const MemberAndUserProfile = () => {
                 <span className="font-medium">Rent/Month:</span>
                 <p>
                     {(agreements &&
+                        agreements?.result?.apartmentDetails?.rent &&
                         agreements?.result?.apartmentDetails?.rent + " BDT") ||
                         "N/A"}
                 </p>
