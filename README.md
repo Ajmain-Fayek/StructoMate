@@ -126,11 +126,35 @@ Structomate aims to streamline the building management process for landlords and
 
 To run the project locally:
 
-1. Clone the repository: `git clone <repo-url>`
-2. Navigate to the project directory: `cd structomate`
-3. Install dependencies: `npm install`
-4. Start the development server: `npm run dev`
-5. Open `http://localhost:<port>` in your browser.
+1. Clone the repository:
+
+```bash
+git clone <repo-url>
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd structomate
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+```
+
+4. Start the development server: 
+
+```bash
+npm run dev
+```
+
+5. Open Localhost URL in your browser.
+
+```bash
+http://localhost:<port>
+```
 
 ---
 
