@@ -22,12 +22,14 @@ import MemberRoutes from "./MemberRoutes";
 import useAxios from "../Hooks/useAxios";
 import AgreementSigning from "../Pages/AgreementSigning/AgreementSigning";
 import UserRoutes from "./UserRoutes";
+import Error404 from "../Pages/Eror404/Error404";
 
 const axiosFetch = useAxios();
 
 const routes = createBrowserRouter([
     {
         path: "/",
+        errorElement: <Error404 />,
         element: <MainLayout />,
         children: [
             // Home layout
