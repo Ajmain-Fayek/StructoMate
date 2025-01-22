@@ -130,12 +130,7 @@ To run the project locally:
 
 ```bash
 git clone https://github.com/Ajmain-Fayek/StructoMate.git
-```
-
-2. Navigate to the project directory:
-
-```bash
-cd structomate
+cd StructoMate
 ```
 
 3. Install dependencies:
