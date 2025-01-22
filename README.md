@@ -4,7 +4,7 @@ Structomate is a building management software designed for single-building manag
 
 ## Live URL
 
-[Live Demo](https://structomate.web.app/)\
+[Live Demo](https://structomate.web.app/)
 
 ---
 
