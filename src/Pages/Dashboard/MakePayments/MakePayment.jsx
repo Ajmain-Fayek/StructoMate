@@ -55,7 +55,7 @@ const MakePayment = () => {
     }
     return (
         <div>
-            <h1 className="text-2xl font-semibold text-center p-2 shadow-lg mb-6 border">
+            <h1 className="text-2xl font-semibold text-center p-2 shadow-lg mb-4 border">
                 Pay Rent
             </h1>
             <p className="p-1 text-red-700 text-xs">
