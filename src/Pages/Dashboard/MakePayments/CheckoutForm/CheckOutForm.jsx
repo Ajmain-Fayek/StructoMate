@@ -115,7 +115,6 @@ const CheckOutForm = ({ paymentData, setShowModal }) => {
         }
     };
 
-    console.log(paymentData);
     return (
         <form className="space-y-4" onSubmit={handleSubmit}>
             <div>

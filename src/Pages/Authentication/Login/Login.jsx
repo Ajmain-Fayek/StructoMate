@@ -82,7 +82,6 @@ const Login = () => {
                 navigate("/");
             }
 
-            // console.log(user, checkUser);
         } catch (err) {
             if (err?.status === 400) {
                 try {

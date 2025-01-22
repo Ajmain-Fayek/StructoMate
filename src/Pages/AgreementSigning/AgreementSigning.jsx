@@ -11,7 +11,6 @@ const AgreementSigning = () => {
     const { user } = useAuthContext();
     const axiosFetch = useAxios();
     const navigate = useNavigate();
-    console.log(data);
 
     const fetchApartments = async () => {
         try {
@@ -59,7 +58,6 @@ const AgreementSigning = () => {
             apartmentDetails: apartments,
         };
         const token = localStorage.getItem("token");
-        // console.log({ newAgreement, token });
         try {
             const { data: agrement } = await axiosFetch.post(
                 "/create/agreements",
@@ -68,7 +66,6 @@ const AgreementSigning = () => {
                     token,
                 }
             );
-            // console.log(agrement?.insertedId);
             if (agrement?.insertedId) {
                 toast.success("Agreement Signed", {
                     position: "top-right",

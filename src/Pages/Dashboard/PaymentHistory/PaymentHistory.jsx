@@ -26,7 +26,6 @@ const PaymentHistory = () => {
         fetchPaymentHistory();
     }, [user, axiosFetch]);
 
-    console.log(paymentHistory);
     return (
         <div>
             <h1 className="text-2xl font-semibold text-center p-2 shadow-lg mb-4 border">
